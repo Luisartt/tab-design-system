@@ -1,0 +1,2 @@
+body{font-family:var(--font-cuerpo);font-size:var(--cuerpo-size);line-height:var(--cuerpo-lh);color:var(--texto-cuerpo);margin:0}
+a{color:var(--enlace)}a:hover{color:var(--enlace-hover)}

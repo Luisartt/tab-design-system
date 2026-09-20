@@ -1,0 +1,6 @@
+:root{
+--esp-1:4px;--esp-2:8px;--esp-3:16px;--esp-4:24px;--esp-5:32px;--esp-6:48px;--esp-7:72px;--esp-8:96px;
+--radio-input:6px;--radio-boton:10px;--radio-tarjeta:14px;--radio-pill:999px;
+--sombra-reposo:0 2px 8px rgba(24,28,77,.10);--sombra-elevada:0 10px 28px rgba(24,28,77,.16);
+--contenedor:1180px;--gutter:24px;--social-margen:72px;
+}

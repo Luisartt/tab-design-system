@@ -1,0 +1,18 @@
+:root{
+--marino-logo:#181C4D;--marino-fondo:#0A153C;--marino-profundo:#002F5A;
+--azul-tab:#0F75BC;--azul-accion:#0063B0;--azul-curva:#1A60AD;
+--naranja:#F78F3F;--naranja-profundo:#F08921;--naranja-presionado:#D97714;
+--hielo:#DBE8F2;--cielo:#9DD4E8;--perla:#EFEEF3;--blanco:#FFFFFF;
+--texto-secundario:#4A5578;--texto-deshabilitado:#8A93B0;
+--error:#B4530A;--error-fondo:#FFF7F0;
+--borde-input:#B9C4D8;--borde-tarjeta:#DBE8F2;
+--seg-1:#0F75BC;--seg-2:#135895;--seg-3:#173D6C;--seg-4:#134885;--seg-5:#182D5C;--seg-6:#1A60AD;
+--texto-cuerpo:var(--marino-logo);--texto-titular:var(--marino-logo);--texto-h2:var(--azul-accion);
+--superficie-pagina:var(--blanco);--superficie-suave:var(--perla);--superficie-oscura:var(--marino-fondo);--superficie-panel:var(--marino-profundo);--superficie-chip:var(--hielo);
+--marca:var(--azul-tab);--marca-hover:var(--azul-accion);--marca-presionado:var(--marino-profundo);
+--acento:var(--naranja);--acento-hover:var(--naranja-profundo);
+--enlace:var(--azul-accion);--enlace-hover:var(--azul-tab);
+--trazo:var(--azul-curva);
+--anillo-foco:0 0 0 3px rgba(15,117,188,.35);--anillo-foco-input:0 0 0 3px rgba(15,117,188,.25);
+--velo-foto:linear-gradient(90deg,rgba(10,21,60,.94) 0%,rgba(10,21,60,.62) 42%,rgba(10,21,60,0) 72%); /* @kind other */
+}

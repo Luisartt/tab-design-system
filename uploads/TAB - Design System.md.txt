@@ -1,0 +1,113 @@
+# Sistema de diseño TAB — The Alternative Board
+
+Guía de identidad para generar piezas de TAB (franquicia internacional de consejos asesores de dueños de negocio). Extraída y verificada píxel a píxel del material vigente: `TAB Logo - 2 Color.png`, `StratPro – Image 1-4.png`, `Taste of TAB - Eventbrite Header.png` y publicaciones de junio 2026. Versión 1.0 · Agosto 2026.
+
+**Personalidad:** profesional, optimista, directa. Ascenso y claridad (la flecha del icono), nunca corporativa fría ni juguetona. Excluida la era previa sepia/script.
+
+---
+
+## 1. Logotipo
+
+Icono: cuadro redondeado dividido por un trazo ascendente en "S" que remata en flecha — mitad superior Azul TAB `#0F75BC`, mitad inferior Marino Logo `#181C4D`. El trazo es **transparente** en el archivo: en la versión blanca, el fondo se asoma por la curva.
+
+| Variante | Archivo | Uso |
+|---|---|---|
+| Principal 2 tintas | `assets/logo/tab-logo-color.png` | Fondos blancos o Perla (defecto) |
+| Blanca (knockout) | `assets/logo/tab-logo-white.png` | Sobre Marino, Azul Acción, Azul TAB o velo fotográfico |
+| Monocroma marino | `assets/logo/tab-logo-navy.png` | Impresión a 1 tinta |
+| Icono aislado | `assets/logo/tab-icon-color.png` / `tab-icon-white.png` | Avatares, favicon, sello — nunca junto al logo completo |
+| Wordmark sin tagline | `assets/logo/tab-wordmark-color.png` | Anchos < 90 px donde el tagline pierde legibilidad |
+
+- Área de protección: ≥ ½ de la altura del wordmark "TAB" por lado.
+- Mínimos: 140 px / 30 mm con tagline · 90 px / 20 mm sin tagline.
+- Prohibido: recolorear fuera de paleta, versión a color sobre marino, deformar, estética sepia/script previa.
+
+**Sub-marcas:** StratPro® (`assets/logo/stratpro-logo.png`, naranja `#F08921` + azul `#1A60AD`, siempre con "Brought to you by TAB") · Hi-MAP (`assets/logo/himap-logo.png`, marino con flecha Azul TAB, tinte de apoyo Cielo).
+
+## 2. Color
+
+Valores exactos por histograma. Los marinos de Canva (`#1C104E`) se normalizan a `#181C4D`.
+
+| Token | Hex | Contraste s/blanco | Uso |
+|---|---|---|---|
+| Marino Logo | `#181C4D` | 16.0:1 AAA | Tagline, titulares sobre claro, texto de tinta |
+| Marino Fondo | `#0A153C` | 17.7:1 AAA | Lienzo dominante de piezas oscuras (StratPro) |
+| Marino Profundo | `#002F5A` | 12.4:1 AAA | Paneles y diamantes sobre Marino Fondo |
+| Azul TAB | `#0F75BC` | 4.9:1 AA | Color de marca: wordmark, botón primario, iconografía activa |
+| Azul Acción | `#0063B0` | 6.2:1 AA | Hover, enlaces, paneles de case study, titulares H2 |
+| Azul Curva | `#1A60AD` | 6.3:1 AA | **Exclusivo de trazos**: borde de curva "S", filetes, divisores |
+| Naranja | `#F78F3F` | 2.3:1 ✕ (7.6:1 s/marino) | Acento minoritario <10%: energía, números, CTA. Sobre blanco solo display ≥ 24 px |
+| Naranja Profundo | `#F08921` | — | Tinta StratPro; hover/presionado del CTA naranja |
+| Hielo | `#DBE8F2` | — | Fondos suaves, bordes, chips |
+| Cielo | `#9DD4E8` | — | Bandas Hi-MAP, subtítulos sobre marino |
+| Perla | `#EFEEF3` | — | Lienzo claro (Taste of TAB) |
+| Texto secundario | `#4A5578` | 7.5:1 | Derivado oklch del marino |
+| Error funcional | `#B4530A` | 5.0:1 | Único uso semántico de error (no hay rojo de marca) |
+
+- Proporción: blanco/Perla 52% · marinos 22% · Azul TAB 12% · Azul Acción 8% · naranja 6%.
+- Máx. 1–2 fondos de color por pieza. Segmentos de diagramas: `#0F75BC #135895 #173D6C #134885 #182D5C #1A60AD`.
+- Enlaces: `a { color:#0063B0 }` · `a:hover { color:#0F75BC }`.
+
+## 3. Tipografía
+
+Tres voces (Google Fonts). **No usar Poppins** (la "a" de los titulares reales es de doble piso).
+
+- **Montserrat** 600–800 — display y titulares; sustituta libre de Gotham (incrustada en el brochure oficial). Eyebrows: 700, caps, tracking `.3em`.
+- **Open Sans** 400/600/700/800 — cuerpo, UI y titulares funcionales (coincide con Taste of TAB y case studies 2026).
+- **IBM Plex Sans** 400 + itálica — voz editorial: citas, manifiestos (incrustada en Year One Roadmap; idéntica a citas StratPro).
+
+| Token | Fuente | Tamaño/interlínea |
+|---|---|---|
+| Display | Montserrat 800 | 56/1.08 |
+| H1 | Montserrat 800 | 40/1.15 |
+| H2 | Open Sans 800 | 30/1.2 (puede ir en `#0063B0`) |
+| H3 | Open Sans 700 | 22/1.3 |
+| Eyebrow | Montserrat 700 caps | 13 · tracking .3em (`#0F75BC` o `#F78F3F`) |
+| Cuerpo | Open Sans 400 | 16/1.65 |
+| Cita | IBM Plex Sans 400 itálica | 21/1.6 |
+| Caption | Open Sans 600 | 13/1.5 en `#4A5578` |
+
+## 4. Espaciado y forma
+
+- Escala 4 px: `4 8 16 24 32 48 72 96` (hairline → aire de portada).
+- Radios: 6 inputs/chips · 10 botones · 14 tarjetas (eco del icono) · pill para badges.
+- Sombras: reposo `0 2px 8px rgba(24,28,77,.10)` · elevada `0 10px 28px rgba(24,28,77,.16)`.
+- Retícula: 12 col · gutter 24 · contenedor 1180 px. Social: lienzo 1080, margen de seguridad 72 px.
+- Bordes de tarjeta: `1.5px solid #DBE8F2`.
+
+## 5. Motivos gráficos
+
+- **A · Curva "S" divisoria** — divide secciones, siempre asciende de izquierda a derecha (eco de la flecha), con filete 4–6 px `#1A60AD` sobre el borde. Una vez por pieza. Path de referencia: `M0,86 C420,132 900,-14 1440,52` en viewBox `0 0 1440 110`.
+- **B · Cortes diagonales y diamante** — triángulos naranja + muesca blanca en esquinas opuestas sobre marino (clip-path); contenedor a 45° en `#002F5A` para logos y datos.
+- **C · Foto con velo** — personas reales y diversas en mesa de junta; gradiente `linear-gradient(90deg, rgba(10,21,60,.94) 0%, rgba(10,21,60,.62) 42%, rgba(10,21,60,0) 72%)`; texto en blanco a la izquierda.
+- **D · Duotono azul** — foto desaturada + capa `#0F75BC` en `multiply`; para fondos de case study con corte diagonal blanco.
+- **E · Pills y filetes** — badge pill (CASE STUDY / WHITE PAPER): Open Sans 800 blanco sobre `#181C4D` o `#0063B0`; chips de tema en Hielo/Perla; filete corto 48×2.5 px `#1A60AD` bajo logos y títulos.
+- **F · Diagrama circular de proceso** — 6 segmentos (conic-gradient desde −30°, azules de paleta), puntos naranja numerados **sobre las fronteras** de segmento, centro blanco con anillo naranja e icono del programa; etiquetas Montserrat 700 caps tracking .18em. Ciclo StratPro: 1 Align · 2 Vision · 3 Diagnose · 4 Plan · 5 Execute · 6 Optimize.
+- Fotografía siempre real (nunca ilustración plana como única imagen de pieza); junta/mesa de trabajo, diversidad visible.
+
+## 6. Componentes
+
+**Botones** (Open Sans 700, radio 10, altura táctil ≥ 44 px):
+- Primario: `#0F75BC` → hover `#0063B0` → presionado `#002F5A`; foco: anillo `0 0 0 3px rgba(15,117,188,.35)`; deshabilitado `#EFEEF3` texto `#8A93B0`.
+- Secundario: borde 2 px `#0F75BC`, texto `#0F75BC`; hover fondo `#DBE8F2`.
+- CTA naranja: `#F78F3F` con **texto Marino Logo** (6.8:1 — blanco sobre naranja no alcanza AA) → hover `#F08921` → presionado `#D97714`. Peso 800.
+- Sobre marino: sólido blanco (texto marino), fantasma (borde `rgba(255,255,255,.55)`), CTA naranja.
+- Terciario: enlace `#0063B0` con flecha "→".
+
+**Formularios** (labels Open Sans 700 13.5, helper 12 `#4A5578`):
+- Input: borde `1.5px #B9C4D8`, radio 6, padding 11×14; focus: borde `#0F75BC` + anillo `rgba(15,117,188,.25)`; error: borde/texto `#B4530A`, fondo `#FFF7F0`; deshabilitado: fondo `#EFEEF3` texto `#8A93B0`.
+- Checkbox/radio: `accent-color:#0F75BC`, 18 px.
+
+**Tarjetas de testimonio** (3 variantes):
+1. Clara: comilla Montserrat 800 naranja, cita IBM Plex itálica 17/1.65, filete `#1A60AD`, avatar círculo 44 px con iniciales sobre `#0F75BC`, nombre + empresa.
+2. Marina: fondo `#0A153C`, triángulo naranja en esquina, cita blanca, filete y anillo de avatar naranjas, empresa en Cielo.
+3. Case study: foto duotono arriba con pill "TAB CASE STUDY", título Open Sans 800 19 marino, enlace "Leer la historia →" `#0063B0`, sombra reposo.
+
+## 7. Reglas rápidas
+
+1. Naranja nunca como texto pequeño sobre blanco; sobre marino rinde 7.6:1.
+2. `#1A60AD` jamás como relleno de superficies — solo trazos.
+3. Una curva "S" por pieza; siempre ascendente.
+4. Máx. 2 fondos de color por pieza (blanco + un marino/azul).
+5. Titulares en Montserrat u Open Sans bold; jamás script/serif (era superada).
+6. Emojis: no forman parte de la marca.

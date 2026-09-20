@@ -1,0 +1,19 @@
+<!-- @dsCard group="Social" viewport="1140x620" name="Piezas sociales" subtitle="Recreacion de StratPro 1080 y case study LinkedIn (fotos como placeholders)" -->
+<!-- @startingPoint section="Social" subtitle="Piezas sociales TAB: StratPro 1080 y case study" viewport="1140x620" -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>TAB · Piezas sociales</title><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:20px;background:#fff;font-family:var(--font-cuerpo)}.zoomA{zoom:.49}.zoomB{zoom:.393}.cap{font-size:12px;font-weight:600;color:#4A5578;margin-top:8px}</style>
+</head><body>
+<div id="root"></div>
+<script type="text/babel" src="StratProPost.jsx"></script>
+<script type="text/babel" src="CaseStudyPost.jsx"></script>
+<script type="text/babel">
+function Kit(){const S=window.StratProPost,C=window.CaseStudyPost;return (<div style={{display:'flex',gap:24,alignItems:'flex-start'}}><div><div className="zoomA"><S/></div><div className="cap">StratPro · 1080×1080 · lienzo Marino Fondo, diamante 45°, rueda de proceso</div></div><div><div className="zoomB"><C/></div><div className="cap">Case study · 1350×700 · los bloques Hielo marcan la foto real (piezas fuente en assets/imagery/)</div></div></div>);}
+const mount=()=>{if(!window.StratProPost||!window.CaseStudyPost||!window.TABDesignSystem_018620){setTimeout(mount,60);return;}ReactDOM.createRoot(document.getElementById('root')).render(<Kit/>);};
+mount();
+</script>
+</body></html>
