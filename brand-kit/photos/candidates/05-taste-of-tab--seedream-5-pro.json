@@ -3,11 +3,11 @@
   "model": "seedream-5-pro",
   "endpoint": "bytedance/seedream/v5/pro/text-to-image",
   "aspect": "16:9",
-  "prompt": "An invitation-only morning sample session for business owners. A small group of six people stand and chat in a bright modern meeting room before sitting down; two of them shake hands warmly, others hold coffee cups. Round tables set with notebooks and water glasses in the background. Relaxed, welcoming, professional, early-morning daylight. Group positioned center-right.",
+  "prompt": "An invitation-only morning sample session for business owners. A small group of six people of different ages and backgrounds stand and chat in a bright modern meeting room before sitting down; in the center-right two of them shake hands warmly while the others hold coffee cups and talk in pairs. Everyone dresses in their own individual business-casual style: a camel sweater, a navy blazer over a white tee, a patterned blouse, an open-collar gingham shirt, a dark knit polo; no two people in matching outfits, no uniforms. Round tables set with notebooks and water glasses in the background. Relaxed, welcoming, professional, early-morning daylight. Group positioned center-right; the left quarter of the frame is soft, out-of-focus window light.",
   "style": "TAB house photography",
   "seed": null,
   "width": null,
   "height": null,
-  "seconds": 53,
-  "generated_at": "2026-09-24T04:01:11.678Z"
+  "seconds": 69,
+  "generated_at": "2026-09-24T04:13:52.724Z"
 }
