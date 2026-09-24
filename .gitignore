@@ -3,4 +3,4 @@ node_modules/
 Thumbs.db
 
 # Shootout candidates stay local; winners live in brand-kit/photos/
-brand-kit/photos/candidates/*.jpg
+brand-kit/photos/candidates/**/*.jpg
