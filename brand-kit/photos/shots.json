@@ -1,0 +1,32 @@
+[
+  {
+    "id": "01-peer-board",
+    "aspect": "16:9",
+    "use": "Hero, photo-veil posts, virtual background. Text sits on the left over the navy veil.",
+    "prompt": "Eight business owners seated around a long light-wood boardroom table during a peer advisory board meeting. A Black woman in her fifties on the right side of the table is speaking with an open-hand gesture; the others listen attentively, a man in his sixties takes notes on paper, coffee cups and printed agendas on the table. Camera at seated eye level from the left end of the table. The group occupies the right two-thirds of the frame; the left third is a calm, softly lit wall and window, slightly out of focus, leaving clean negative space."
+  },
+  {
+    "id": "02-coaching",
+    "aspect": "4:5",
+    "use": "Portrait social posts (1080x1350), coaching and 1:1 messaging.",
+    "prompt": "A one-on-one business coaching session. A gray-haired male coach in his sixties and a South Asian woman business owner in her forties sit side by side at a small round table, reviewing a printed one-page strategic plan together; she points at the page, he listens with a slight, genuine smile. Warm, trusting, focused. The two people sit in the lower right and center of the frame; the upper-left area is a quiet, uncluttered wall with soft window light."
+  },
+  {
+    "id": "03-owner",
+    "aspect": "4:5",
+    "use": "Member spotlight and 'your business' messaging; duotone-friendly.",
+    "prompt": "Environmental portrait of a Latino business owner in his late forties standing in his own metal fabrication shop, sleeves rolled up, arms relaxed, calm and confident expression, looking just off camera. The shop floor with machinery is softly out of focus behind him, daylight from high windows. He stands right of center; the left side of the frame is soft out-of-focus background."
+  },
+  {
+    "id": "04-strategy-workshop",
+    "aspect": "16:9",
+    "use": "StratPro and strategic-planning content, LinkedIn link posts.",
+    "prompt": "A leadership team strategy workshop. Five managers of a mid-size company stand at a white wall covered with rows of colored sticky notes and a hand-drawn circular process sketch, with no legible writing anywhere. A woman facilitator in her thirties gestures toward the wall while two colleagues discuss and another adds a note. Energetic, collaborative, focused. Bright daylight office, people grouped in the right half of the frame."
+  },
+  {
+    "id": "05-taste-of-tab",
+    "aspect": "16:9",
+    "use": "Taste of TAB invitation-only event promotion, event banners.",
+    "prompt": "An invitation-only morning sample session for business owners. A small group of six people stand and chat in a bright modern meeting room before sitting down; two of them shake hands warmly, others hold coffee cups. Round tables set with notebooks and water glasses in the background. Relaxed, welcoming, professional, early-morning daylight. Group positioned center-right."
+  }
+]

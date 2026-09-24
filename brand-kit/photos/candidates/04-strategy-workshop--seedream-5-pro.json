@@ -1,0 +1,13 @@
+{
+  "id": "04-strategy-workshop",
+  "model": "seedream-5-pro",
+  "endpoint": "bytedance/seedream/v5/pro/text-to-image",
+  "aspect": "16:9",
+  "prompt": "A leadership team strategy workshop. Five managers of a mid-size company stand at a white wall covered with rows of colored sticky notes and a hand-drawn circular process sketch, with no legible writing anywhere. A woman facilitator in her thirties gestures toward the wall while two colleagues discuss and another adds a note. Energetic, collaborative, focused. Bright daylight office, people grouped in the right half of the frame.",
+  "style": "TAB house photography",
+  "seed": null,
+  "width": null,
+  "height": null,
+  "seconds": 65,
+  "generated_at": "2026-09-24T04:01:23.200Z"
+}

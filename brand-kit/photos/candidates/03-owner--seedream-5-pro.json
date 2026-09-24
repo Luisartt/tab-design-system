@@ -1,0 +1,13 @@
+{
+  "id": "03-owner",
+  "model": "seedream-5-pro",
+  "endpoint": "bytedance/seedream/v5/pro/text-to-image",
+  "aspect": "4:5",
+  "prompt": "Environmental portrait of a Latino business owner in his late forties standing in his own metal fabrication shop, sleeves rolled up, arms relaxed, calm and confident expression, looking just off camera. The shop floor with machinery is softly out of focus behind him, daylight from high windows. He stands right of center; the left side of the frame is soft out-of-focus background.",
+  "style": "TAB house photography",
+  "seed": null,
+  "width": null,
+  "height": null,
+  "seconds": 47,
+  "generated_at": "2026-09-24T04:01:05.080Z"
+}

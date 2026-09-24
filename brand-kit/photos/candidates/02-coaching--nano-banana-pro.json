@@ -1,0 +1,13 @@
+{
+  "id": "02-coaching",
+  "model": "nano-banana-pro",
+  "endpoint": "fal-ai/nano-banana-pro",
+  "aspect": "4:5",
+  "prompt": "A one-on-one business coaching session. A gray-haired male coach in his sixties and a South Asian woman business owner in her forties sit side by side at a small round table, reviewing a printed one-page strategic plan together; she points at the page, he listens with a slight, genuine smile. Warm, trusting, focused. The two people sit in the lower right and center of the frame; the upper-left area is a quiet, uncluttered wall with soft window light.",
+  "style": "TAB house photography",
+  "seed": null,
+  "width": 1856,
+  "height": 2304,
+  "seconds": 29,
+  "generated_at": "2026-09-24T04:00:47.209Z"
+}

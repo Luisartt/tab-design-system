@@ -1,0 +1,13 @@
+{
+  "id": "01-peer-board",
+  "model": "seedream-5-pro",
+  "endpoint": "bytedance/seedream/v5/pro/text-to-image",
+  "aspect": "16:9",
+  "prompt": "Eight business owners seated around a long light-wood boardroom table during a peer advisory board meeting. A Black woman in her fifties on the right side of the table is speaking with an open-hand gesture; the others listen attentively, a man in his sixties takes notes on paper, coffee cups and printed agendas on the table. Camera at seated eye level from the left end of the table. The group occupies the right two-thirds of the frame; the left third is a calm, softly lit wall and window, slightly out of focus, leaving clean negative space.",
+  "style": "TAB house photography",
+  "seed": null,
+  "width": null,
+  "height": null,
+  "seconds": 63,
+  "generated_at": "2026-09-24T04:01:21.349Z"
+}
