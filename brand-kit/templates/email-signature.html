@@ -38,21 +38,22 @@
 <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;font-family:'Open Sans',Arial,Helvetica,sans-serif;color:#181C4D;">
   <tr>
     <td valign="top" style="padding:4px 22px 0 0;vertical-align:top;">
-      <!-- LOGO: export brand-kit/exports/tab-logo-color-600.png (600px wide, white background),
-           host it on your own website or CDN over https, and replace the src below with its
-           absolute URL. Keep width="150" (display size; the 600px file keeps it sharp on retina). -->
+      <!-- LOGO: use brand-kit/exports/tab-logo-color-600.png (600px wide, WHITE background; a transparent
+           color logo disappears on dark-mode mail and is not allowed). Host that PNG on your own website
+           or CDN over https and replace the src below with its absolute URL (or paste the URL into the
+           editor's "Hosted logo URL" field). Keep width="150": the 600px file keeps it sharp on retina. -->
       <img data-sig-logo src="https://www.example.com/email/tab-logo-color-600.png" data-preview-src="../exports/tab-logo-color-600.png" width="150" alt="TAB The Alternative Board" style="display:block;width:150px;height:auto;border:0;outline:none;text-decoration:none;">
     </td>
     <td valign="top" style="padding:0 0 0 22px;border-left:2px solid #DBE8F2;vertical-align:top;">
-      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#181C4D;"><span data-field="name" data-label="Name" data-max="40">Alex Morgan</span></p>
-      <p style="margin:2px 0 0 0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;font-weight:400;color:#4A5578;"><span data-field="title" data-label="Title" data-max="48">Business Coach &amp; Board Facilitator</span></p>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#181C4D;"><span data-field="name" data-label="Name" data-max="40">[Your name]</span></p>
+      <p style="margin:2px 0 0 0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;font-weight:400;color:#4A5578;"><span data-field="title" data-label="Title" data-max="48" data-help="Use your official TAB title.">[Title]</span></p>
       <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;font-weight:700;color:#181C4D;"><span data-field="company" data-label="Company" data-max="48">The Alternative Board (TAB)</span></p>
       <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;margin:10px 0 10px 0;">
         <tr><td width="48" height="3" bgcolor="#1A60AD" style="width:48px;height:2.5px;background-color:#1A60AD;font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td></tr>
       </table>
-      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">P</span>&nbsp;&nbsp;<a data-bind-href="tel:{phone|tel}" href="tel:5125550142" style="color:#181C4D;text-decoration:none;"><span data-field="phone" data-label="Phone" data-max="24">(512) 555-0142</span></a></p>
-      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">E</span>&nbsp;&nbsp;<a data-bind-href="mailto:{email}" href="mailto:alex.morgan@example.com" style="color:#0063B0;text-decoration:none;"><span data-field="email" data-label="Email" data-max="48">alex.morgan@example.com</span></a></p>
-      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">W</span>&nbsp;&nbsp;<a data-bind-href="https://{website|url}" href="https://www.thealternativeboard.com" style="color:#0063B0;text-decoration:none;"><span data-field="website" data-label="Website" data-max="48">thealternativeboard.com</span></a></p>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">P</span>&nbsp;&nbsp;<a data-bind-href="tel:{phone|tel}" href="tel:" style="color:#181C4D;text-decoration:none;"><span data-field="phone" data-label="Phone" data-max="24">[Phone]</span></a></p>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">E</span>&nbsp;&nbsp;<a data-bind-href="mailto:{email}" href="mailto:" style="color:#0063B0;text-decoration:none;"><span data-field="email" data-label="Email" data-max="48">[email@yourdomain.com]</span></a></p>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">W</span>&nbsp;&nbsp;<a data-bind-href="https://{website|url}" href="https://" style="color:#0063B0;text-decoration:none;"><span data-field="website" data-label="Website" data-max="48">[Website]</span></a></p>
     </td>
   </tr>
 </table>
@@ -81,7 +82,8 @@
   "photos": [],
   "export": "signature",
   "rules": [
-    "Host tab-logo-color-600.png on your own https site and paste its URL into 'Hosted logo URL' before copying.",
+    "Host exports/tab-logo-color-600.png (white background) on your own https site and paste its URL into 'Hosted logo URL' before copying. Never use a transparent color logo in email.",
+    "Replace every [bracketed] field with your own details.",
     "Logo stays at 150px wide: the minimum with tagline is 140px.",
     "No quotes, banners, emoji or extra colors in signatures.",
     "Fonts fall back to Arial in most mail apps; that's expected."
@@ -107,7 +109,9 @@
   function signatureHTML() {
     var clone = document.getElementById('signature').cloneNode(true);
     var img = clone.querySelector('[data-sig-logo]');
-    if (img) img.setAttribute('src', fieldValue('logo_url').trim() || 'https://www.example.com/email/tab-logo-color-600.png');
+    var hosted = fieldValue('logo_url').trim();
+    if (!/^https:\/\/[^\s"'<>]+$/i.test(hosted)) hosted = 'https://www.example.com/email/tab-logo-color-600.png';
+    if (img) img.setAttribute('src', hosted);
     clone.querySelectorAll('*').forEach(function (el) {
       ['contenteditable', 'spellcheck', 'class'].forEach(function (a) { el.removeAttribute(a); });
       Array.prototype.slice.call(el.attributes).forEach(function (a) { if (/^data-/.test(a.name)) el.removeAttribute(a.name); });

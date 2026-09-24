@@ -14,10 +14,10 @@
   /* Text column stays inside the dense part of the veil (<= ~45% of the width) */
   .content {
     position: absolute; left: var(--m); bottom: var(--m); top: 300px;
-    width: 500px;
+    width: 414px;   /* right edge 486px = 45% of 1080: inside the dense part of the veil */
     display: flex; flex-direction: column; justify-content: flex-end;
   }
-  .content .eyebrow { font-size: 24px; margin-bottom: 28px; }
+  .content .eyebrow { margin-bottom: 28px; }
   .content .display { font-size: 80px; line-height: 1.06; }
   .content .rule { margin: 44px 0 40px; }
   .content .body-copy { font-size: 30px; line-height: 1.45; }
@@ -41,7 +41,7 @@
   </div>
 
   <div class="content" data-fit-box>
-    <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="32" data-optional>Peer advisory boards</div>
+    <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="18" data-optional>Business owners</div>
     <h1 class="display" data-field="headline" data-label="Headline" data-max="60" data-fit="52">You don’t have to figure it out alone</h1>
     <span class="rule"></span>
     <p class="body-copy" data-field="body" data-label="Body (1–2 lines)" data-max="110" data-multiline data-optional data-fit="24">A board of fellow business owners brings perspective, accountability and honest advice.</p>

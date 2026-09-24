@@ -10,6 +10,8 @@
   .artboard { --k: 2; --m: 56px; background: var(--blanco); }
 
   .photo-wrap { left: auto; right: 0; width: 700px; }
+  /* empty slot: solid Azul TAB duotone panel with a label, centred in the visible (uncut) area */
+  .photo-placeholder { left: 62%; transform: translate(-50%, -50%); font-size: 26px; }
 
   /* White panel; its right edge ascends left-to-right (bottom 520 -> top 650) */
   .panel {
@@ -20,10 +22,7 @@
 
   .content { position: absolute; left: var(--m); top: var(--m); bottom: 150px; width: 470px; display: flex; flex-direction: column; }
   .pill { align-self: flex-start; font-size: 20px; padding: 10px 24px; }
-  .member {
-    margin-top: 30px; font-family: var(--font-cuerpo); font-weight: 800; font-size: 22px; line-height: 1.3;
-    letter-spacing: .03em; text-transform: uppercase; color: var(--azul-accion);
-  }
+  .member { margin-top: 30px; font-family: var(--font-cuerpo); font-weight: 800; font-size: 24px; line-height: 1.3; color: var(--azul-accion); }
   .title { margin-top: 18px; font-family: var(--font-cuerpo); font-weight: 800; font-size: 50px; line-height: 1.12; color: var(--marino-logo); }
   .rule { margin-top: 30px; }
 
@@ -36,7 +35,9 @@
 <body>
 <main class="artboard" data-template="case-study-link" data-variant="navy-pill" style="width:1200px;height:627px">
   <div class="photo-wrap duotone">
-    <img class="photo" data-photo="main" src="../photos/03-owner.jpg" alt="" style="object-position:58% 30%">
+    <!-- Upload-only: case studies must use the member's real photo, never an AI brand photo. -->
+    <img class="photo" data-photo="main" alt="" style="object-position:50% 30%">
+    <div class="photo-placeholder" aria-hidden="true">[Member photo]</div>
   </div>
   <div class="panel"></div>
 
@@ -59,8 +60,10 @@
   "size": [1200, 627],
   "motif": "D · Duotone + diagonal cut, E · Pill",
   "variants": { "navy-pill": "Marino badge", "blue-pill": "Azul Acción badge" },
-  "photos": ["03-owner", "02-coaching", "04-strategy-workshop"],
+  "photos": [],
+  "photoPolicy": "upload-only",
   "rules": [
+    "Case studies need the member's real photo (uploaded). AI brand photos are never allowed next to a member's name.",
     "Case studies use the member's real name and company (credibility first) and need their written consent.",
     "Duotone is automatic: grayscale photo multiplied with Azul TAB #0F75BC. Don't add filters.",
     "Titles are outcome-focused and in sentence case (e.g. 'Leading smarter by learning to delegate').",

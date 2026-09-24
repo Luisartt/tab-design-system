@@ -44,7 +44,29 @@
     try { h = decodeURIComponent(h); } catch (e) { /* noop */ }
     try { return JSON.parse(h); } catch (e) { return null; }
   }
-  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  // Build DOM nodes without HTML strings: user-, hash- and file-controlled values only ever reach
+  // textContent or DOM properties, never innerHTML.
+  function h(tag, props) {
+    var node = document.createElement(tag);
+    Object.keys(props || {}).forEach(function (k) {
+      if (k === 'text') node.textContent = props[k];
+      else if (k === 'class') node.className = props[k];
+      else if (k === 'attrs') Object.keys(props.attrs).forEach(function (a) { node.setAttribute(a, props.attrs[a]); });
+      else node[k] = props[k];
+    });
+    for (var i = 2; i < arguments.length; i++) if (arguments[i]) node.appendChild(typeof arguments[i] === 'string' ? document.createTextNode(arguments[i]) : arguments[i]);
+    return node;
+  }
+  function sizeText(t) { return Number(t.size[0]) + '×' + Number(t.size[1]); }
+  function thumb(id, t) {
+    var img = h('img', { alt: '', loading: 'lazy', src: '../exports/' + encodeURIComponent(id) + '.png' });
+    var box = h('span', { class: 'tpl-thumb' }, img);
+    img.addEventListener('error', function () { box.replaceChildren(h('span', { text: sizeText(t) })); });
+    return box;
+  }
+  // Photos arriving in a share-link hash may only point at the brand photo folder.
+  var SAFE_PHOTO = /^\.\.\/photos\/[\w-]+\.(?:jpe?g|png|webp)$/i;
+  var UPLOAD_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
   function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return legacyCopy(text); });
     return Promise.resolve(legacyCopy(text));
@@ -84,14 +106,11 @@
 
   /* ---------------- template picker ---------------- */
   function renderTemplateGrid() {
-    el.grid.innerHTML = '';
+    el.grid.replaceChildren();
     S.catalog.templates.forEach(function (t) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'tpl-card'; b.dataset.id = t.id; b.setAttribute('aria-pressed', 'false');
-      b.innerHTML = '<div class="tpl-thumb"><img alt="" loading="lazy" src="../exports/' + esc(t.id) + '.png"></div>' +
-        '<div class="tpl-name">' + esc(t.name) + '</div><div class="tpl-size">' + t.size[0] + '×' + t.size[1] + ' · ' + esc(t.use) + '</div>';
-      b.querySelector('img').addEventListener('error', function () { this.parentNode.innerHTML = '<span>' + t.size[0] + '×' + t.size[1] + '</span>'; });
-      b.title = t.name + ' · ' + t.size[0] + '×' + t.size[1] + ' · ' + t.use;
+      var b = h('button', { type: 'button', class: 'tpl-card', title: t.name + ' · ' + sizeText(t) + ' · ' + t.use, attrs: { 'aria-pressed': 'false' } },
+        thumb(t.id, t), h('span', { class: 'tpl-name', text: t.name }), h('span', { class: 'tpl-size', text: sizeText(t) + ' · ' + t.use }));
+      b.dataset.id = t.id;
       b.addEventListener('click', function () { if (t.id !== S.id) loadTemplate(t.id, null); $('picker').open = false; });
       el.grid.appendChild(b);
     });
@@ -106,9 +125,9 @@
     el.loading.hidden = false;
     Array.prototype.forEach.call(el.grid.children, function (c) { c.setAttribute('aria-pressed', String(c.dataset.id === id)); });
     var t = S.catalog.templates.filter(function (x) { return x.id === id; })[0];
-    $('picker-current').innerHTML = '<span class="tpl-thumb"><img alt="" src="../exports/' + esc(id) + '.png"></span>' +
-      '<span class="picker-text"><span class="tpl-name">' + esc(t.name) + '</span><span class="tpl-size">' + t.size[0] + '×' + t.size[1] + ' · ' + esc(t.use) + '</span></span>' +
-      '<span class="picker-toggle" aria-hidden="true"></span>';
+    $('picker-current').replaceChildren(thumb(id, t),
+      h('span', { class: 'picker-text' }, h('span', { class: 'tpl-name', text: t.name }), h('span', { class: 'tpl-size', text: sizeText(t) + ' · ' + t.use })),
+      h('span', { class: 'picker-toggle', attrs: { 'aria-hidden': 'true' } }));
 
     el.frame.onload = function () {
       if (token !== S.loadToken) return;
@@ -117,7 +136,10 @@
       if (!TAB) { toast('This template did not load its runtime (_template.js).', true); el.loading.hidden = true; return; }
       S.win = win; S.TAB = TAB; S.meta = TAB.meta || {};
       S.defaults = TAB.get();
-      if (initial) TAB.apply(initial);
+      if (initial) {
+        if (initial.photo && (S.meta.photoPolicy === 'upload-only' || !SAFE_PHOTO.test(initial.photo))) { delete initial.photo; delete initial.focus; }
+        TAB.apply(initial);
+      }
       TAB.enableEditing(true);
 
       var size = TAB.size();
@@ -166,19 +188,18 @@
     var v = S.TAB.variants();
     var keys = v ? Object.keys(v) : [];
     el.secVariant.hidden = keys.length < 2;
-    el.variants.innerHTML = '';
+    el.variants.replaceChildren();
     var current = S.TAB.getVariant();
     keys.forEach(function (k) {
-      var lab = document.createElement('label');
-      lab.innerHTML = '<input type="radio" name="variant" value="' + esc(k) + '"' + (k === current ? ' checked' : '') + '><span>' + esc(v[k]) + '</span>';
-      lab.querySelector('input').addEventListener('change', function () { S.TAB.setVariant(k); });
-      el.variants.appendChild(lab);
+      var radio = h('input', { type: 'radio', name: 'variant', value: k, checked: k === current });
+      radio.addEventListener('change', function () { S.TAB.setVariant(k); });
+      el.variants.appendChild(h('label', null, radio, h('span', { text: v[k] })));
     });
   }
 
   /* ---------------- fields ---------------- */
   function renderFields() {
-    el.fields.innerHTML = '';
+    el.fields.replaceChildren();
     S.inputs = {};
     S.TAB.fields().forEach(function (f) {
       var id = 'f-' + f.name;
@@ -189,13 +210,15 @@
       else control.rows = Math.min(4, Math.max(2, Math.ceil((f.max || 80) / 45)));
       control.className = 'input'; control.id = id; control.value = f.value; control.spellcheck = true;
       control.setAttribute('aria-describedby', id + '-count' + (f.help ? ' ' + id + '-help' : ''));
-      wrap.innerHTML = '<div class="field-head"><label for="' + id + '">' + esc(f.label) + (f.optional ? ' <span class="helper" style="font-weight:600">optional</span>' : '') + '</label>' +
-        '<span class="counter" id="' + id + '-count"></span></div>';
+      var label = h('label', { htmlFor: id }, f.label);
+      if (f.optional) label.appendChild(h('span', { class: 'helper optional-tag', text: ' optional' }));
+      var counter = h('span', { class: 'counter', id: id + '-count' });
+      wrap.appendChild(h('div', { class: 'field-head' }, label, counter));
       wrap.appendChild(control);
       if (f.help) { var p = document.createElement('p'); p.className = 'helper'; p.id = id + '-help'; p.textContent = f.help; p.style.marginTop = '0'; wrap.appendChild(p); }
       control.addEventListener('input', function () { S.TAB.setField(f.name, control.value); updateCounter(f.name); });
       el.fields.appendChild(wrap);
-      S.inputs[f.name] = { control: control, counter: wrap.querySelector('.counter'), max: f.max, label: f.label };
+      S.inputs[f.name] = { control: control, counter: counter, max: f.max, label: f.label };
       updateCounter(f.name);
     });
   }
@@ -234,39 +257,40 @@
     var has = S.TAB.hasPhoto();
     el.secPhoto.hidden = !has;
     if (!has) return;
+    // Templates can restrict the slot to uploads only (case studies: the member's real photo).
+    var uploadOnly = S.meta.photoPolicy === 'upload-only';
     var recommended = S.meta.photos || [];
-    var list = S.catalog.photos.slice().sort(function (a, b) {
+    var list = uploadOnly ? [] : S.catalog.photos.slice().sort(function (a, b) {
       var ia = recommended.indexOf(a.id), ib = recommended.indexOf(b.id);
       return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
     });
     var current = S.TAB.getPhoto();
-    el.photoGrid.innerHTML = '';
+    el.photoGrid.replaceChildren();
     list.forEach(function (p) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'photo-tile'; b.title = p.label + ' (' + p.aspect + ')'; b.dataset.photoId = p.id;
-      b.setAttribute('aria-label', p.label);
-      b.setAttribute('aria-pressed', String(photoKey(current) === p.id));
-      b.innerHTML = '<img alt="" loading="lazy" src="' + esc(p.src) + '">' + (recommended.indexOf(p.id) >= 0 ? '<span class="tag">Suggested</span>' : '');
-      b.querySelector('img').addEventListener('error', function () {
+      var img = h('img', { alt: '', loading: 'lazy', src: p.src });
+      img.addEventListener('error', function () {
         var alt = p.src.replace(/\/photos\/([\w-]+)\.jpg$/, '/photos/candidates/$1--nano-banana-pro.jpg');
-        if (this.src.indexOf('candidates') < 0) this.src = alt;
+        if (img.src.indexOf('candidates') < 0) img.src = alt;
       });
+      var b = h('button', { type: 'button', class: 'photo-tile', title: p.label + ' (' + p.aspect + ')',
+        attrs: { 'aria-label': p.label, 'aria-pressed': String(photoKey(current) === p.id) } },
+        img, recommended.indexOf(p.id) >= 0 ? h('span', { class: 'tag', text: 'Suggested' }) : null);
+      b.dataset.photoId = p.id;
       b.addEventListener('click', function () { pickPhoto(p); });
       el.photoGrid.appendChild(b);
     });
     if (S.uploaded) {
-      var u = document.createElement('button');
-      u.type = 'button'; u.className = 'photo-tile'; u.dataset.photoId = '__upload'; u.setAttribute('aria-label', 'Your uploaded photo');
-      u.setAttribute('aria-pressed', String(current === S.uploaded));
-      u.innerHTML = '<img alt="" src="' + S.uploaded + '"><span class="tag">Yours</span>';
+      var u = h('button', { type: 'button', class: 'photo-tile', attrs: { 'aria-label': 'Your uploaded photo', 'aria-pressed': String(current === S.uploaded) } },
+        h('img', { alt: '', src: S.uploaded }), h('span', { class: 'tag', text: 'Yours' }));
+      u.dataset.photoId = '__upload';
       u.addEventListener('click', function () { S.TAB.setPhoto(S.uploaded); setFocus(50, 50); markPhoto(); });
       el.photoGrid.appendChild(u);
     }
-    var up = document.createElement('label');
-    up.className = 'photo-tile upload';
-    up.innerHTML = '<input type="file" accept="image/jpeg,image/png,image/webp" aria-label="Upload your own photo">Upload your own<small>JPG or PNG</small>';
-    up.querySelector('input').addEventListener('change', onUpload);
-    el.photoGrid.appendChild(up);
+    var input = h('input', { type: 'file', accept: UPLOAD_TYPES.join(','), attrs: { 'aria-label': 'Upload your own photo' } });
+    input.addEventListener('change', onUpload);
+    el.photoGrid.appendChild(h('label', { class: 'photo-tile upload' }, input,
+      uploadOnly ? 'Upload the member’s photo' : 'Upload your own', h('small', { text: 'JPG, PNG or WebP' })));
+    el.photoGrid.classList.toggle('upload-only', uploadOnly);
 
     var f = S.TAB.getFocus() || { x: 50, y: 50 };
     el.fx.value = f.x; el.fy.value = f.y; el.fxOut.textContent = Math.round(f.x) + '%'; el.fyOut.textContent = Math.round(f.y) + '%';
@@ -288,16 +312,17 @@
   function onUpload(e) {
     var file = e.target.files && e.target.files[0];
     if (!file) return;
-    if (!/^image\//.test(file.type)) { toast('Please choose a JPG or PNG photo.', true); return; }
+    // exact allowlist: file.type ends up in the data: URL, so never trust a prefix match
+    if (UPLOAD_TYPES.indexOf(file.type) < 0) { toast('Please choose a JPG, PNG or WebP photo.', true); return; }
     var reader = new FileReader();
     reader.onload = function () {
       // downscale very large photos so previews and exports stay fast
       var img = new Image();
       img.onload = function () {
-        var max = 2600, w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, max / Math.max(w, h));
+        var max = 2600, w = img.naturalWidth, ht = img.naturalHeight, k = Math.min(1, max / Math.max(w, ht));
         var src = reader.result;
         if (k < 1) {
-          var c = document.createElement('canvas'); c.width = Math.round(w * k); c.height = Math.round(h * k);
+          var c = document.createElement('canvas'); c.width = Math.round(w * k); c.height = Math.round(ht * k);
           c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
           src = c.toDataURL('image/jpeg', 0.9);
         }
@@ -322,6 +347,14 @@
   /* ---------------- brand check ---------------- */
   var scheduleChecks = debounce(runChecks, 150);
   var CAPS_OK = /^(eyebrow|badge|kicker)$/;
+  var HEADLINE_FIELDS = /^(headline|title|h1|label|tagline)$/;
+  // Title Case: more than 60% of the words longer than 3 letters start with a capital (acronyms ignored)
+  function isTitleCase(v) {
+    var words = v.split(/\s+/).map(function (w) { return w.replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, ''); })
+      .filter(function (w) { return w.length > 3 && !/^[A-Z0-9]+$/.test(w); });
+    if (words.length < 2) return false;
+    return words.filter(function (w) { return /^[A-Z]/.test(w); }).length / words.length > 0.6;
+  }
   // Extended_Pictographic includes ©, ® and ™, which are legitimate (StratPro®): exclude them.
   var EMOJI = /(?![\u00A9\u00AE\u2122])\p{Extended_Pictographic}/u;
   function runChecks() {
@@ -338,6 +371,7 @@
       if (/!\s*!/.test(v) || (v.match(/!/g) || []).length > 1) issues.push(['warn', f.label, 'Avoid exclamation chains; let the content carry the optimism.']);
       var letters = v.replace(/[^A-Za-z]/g, '');
       if (!CAPS_OK.test(f.name) && letters.length > 8 && v === v.toUpperCase() && /\s/.test(v.trim())) issues.push(['warn', f.label, 'Use sentence case. Capitals are only for eyebrows and badges.']);
+      if (HEADLINE_FIELDS.test(f.name) && isTitleCase(v)) issues.push(['warn', f.label, 'Use sentence case (capitalize only the first word and names), not Title Case.']);
       if (!f.optional && !v.trim()) issues.push(['warn', f.label, 'This field is empty.']);
     });
     S.TAB.overflowing().forEach(function (name) {
@@ -345,22 +379,19 @@
       issues.push(['error', f ? f.label : name, 'Doesn\'t fit even at the smallest allowed size. Shorten the text.']);
     });
     var photo = S.TAB.hasPhoto() ? S.TAB.getPhoto() : null;
-    if (photo && /^data:/.test(photo)) issues.push(['info', 'Your photo', 'Use real people in real working settings, and only images you have the rights to. No flat illustrations as the only image.']);
+    if (S.meta.photoPolicy === 'upload-only' && !/^data:image\//.test(photo || '')) issues.push(['error', 'Member photo', 'Case studies need the member’s real photo. AI brand photos are never allowed here.']);
+    else if (photo && /^data:/.test(photo)) issues.push(['info', 'Your photo', 'Use real people in real working settings, and only images you have the rights to. No flat illustrations as the only image.']);
     if (S.id === 'social-stat' && byName.source && !byName.source.value.trim()) issues.push(['warn', 'Source line', 'Add where this number comes from. Stats need a real, checkable source.']);
     if (S.id === 'email-signature' && byName.logo_url && /example\.com/.test(byName.logo_url.value)) issues.push(['warn', 'Hosted logo URL', 'Still points to example.com. Host tab-logo-color-600.png and paste its https URL.']);
 
-    el.issues.innerHTML = '';
-    issues.forEach(function (i) {
-      var li = document.createElement('li'); li.className = i[0];
-      li.innerHTML = '<b>' + esc(i[1]) + '</b>' + esc(i[2]);
-      el.issues.appendChild(li);
-    });
+    el.issues.replaceChildren();
+    issues.forEach(function (i) { el.issues.appendChild(h('li', { class: i[0] }, h('b', { text: i[1] }), i[2])); });
     var blocking = issues.filter(function (i) { return i[0] !== 'info'; }).length;
     el.status.textContent = blocking ? blocking + (blocking === 1 ? ' thing to fix before publishing' : ' things to fix before publishing') : 'Looks on-brand. Ready to export.';
     el.status.classList.toggle('has-issues', blocking > 0);
 
-    el.rules.innerHTML = '';
-    (S.meta.rules || []).forEach(function (r) { var li = document.createElement('li'); li.textContent = r; el.rules.appendChild(li); });
+    el.rules.replaceChildren();
+    (S.meta.rules || []).forEach(function (r) { el.rules.appendChild(h('li', { text: r })); });
   }
 
   /* ---------------- share links (content lives in the URL hash) ---------------- */
@@ -410,7 +441,10 @@
   }
   function richCopy(html) {
     var box = document.createElement('div'); box.contentEditable = 'true'; box.style.cssText = 'position:fixed;left:-9999px;top:0';
-    box.innerHTML = html; document.body.appendChild(box);
+    // parse into an inert document and drop any event-handler attributes before inserting
+    var parsed = new DOMParser().parseFromString(html, 'text/html');
+    parsed.querySelectorAll('*').forEach(function (n) { Array.prototype.slice.call(n.attributes).forEach(function (a) { if (/^on/i.test(a.name)) n.removeAttribute(a.name); }); });
+    box.append.apply(box, Array.prototype.slice.call(parsed.body.childNodes)); document.body.appendChild(box);
     var r = document.createRange(); r.selectNodeContents(box);
     var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
     var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
@@ -451,6 +485,9 @@
       return new Promise(function (res, rej) { var fr = new FileReader(); fr.onload = function () { res(fr.result); }; fr.onerror = rej; fr.readAsDataURL(b); });
     });
   }
+  function embedsFamily(css, family) {
+    return !!css && new RegExp('font-family:\\s*[\'"]?' + family + '[\'"]?\\s*;').test(css);
+  }
   function fontEmbedCSS(doc) {
     if (S.fontCSS) return Promise.resolve(S.fontCSS);
     var hrefs = googleFontHrefs(doc);
@@ -474,8 +511,20 @@
     var size = TAB.size();
     Promise.all([ensureHtmlToImage(win), fontEmbedCSS(win.document), TAB.ready()])
       .then(function (r) {
+        // Mirror tools/render.mjs: never export in fallback fonts. Check both the page and the
+        // @font-face CSS that html-to-image embeds (the export renders in isolation).
+        var fonts = r[2].fonts;
+        var missing = Object.keys(fonts).filter(function (f) { return !fonts[f] || !embedsFamily(r[1], f); });
+        if (missing.length) {
+          var err = new Error('PNG not exported: brand fonts did not load (' + missing.join(', ') + '). Check your internet connection, reload the page and try again.');
+          err.fonts = true; throw err;
+        }
         node.classList.add('tab-exporting');
-        return r[0].toPng(node, { width: size.width, height: size.height, pixelRatio: 1, fontEmbedCSS: r[1], cacheBust: false });
+        return r[0].toPng(node, {
+          width: size.width, height: size.height, pixelRatio: 1, fontEmbedCSS: r[1], cacheBust: false,
+          // an empty upload slot (<img> without src) never fires load/error and would stall html-to-image
+          filter: function (n) { return !(n.tagName === 'IMG' && !n.getAttribute('src')); }
+        });
       })
       .then(function (dataUrl) {
         var v = TAB.getVariant();
@@ -484,7 +533,10 @@
         document.body.appendChild(a); a.click(); a.remove();
         toast('PNG downloaded at ' + size.width + '×' + size.height + ' px.');
       })
-      .catch(function (e) { console.error(e); toast('Export failed: ' + (e && e.message ? e.message : e) + '. Try again, or use tools/render.mjs.', true); })
+      .catch(function (e) {
+        console.error(e);
+        toast(e && e.fonts ? e.message : 'Export failed: ' + (e && e.message ? e.message : e) + '. Try again, or use tools/render.mjs.', true);
+      })
       .then(function () { node.classList.remove('tab-exporting'); btn.removeAttribute('aria-busy'); btn.textContent = 'Download PNG'; });
   }
 

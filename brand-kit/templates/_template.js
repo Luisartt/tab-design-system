@@ -311,7 +311,7 @@
       .then(function () {
         return {
           fonts: fontReport(),
-          failedImages: Array.prototype.filter.call(doc.images, function (i) { return !i.naturalWidth; }).map(function (i) { return i.getAttribute('src'); }),
+          failedImages: Array.prototype.filter.call(doc.images, function (i) { return i.getAttribute('src') && !i.naturalWidth; }).map(function (i) { return i.getAttribute('src'); }),
           overflow: overflowing()
         };
       });

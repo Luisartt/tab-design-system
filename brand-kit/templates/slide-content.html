@@ -9,7 +9,6 @@
   .artboard { --k: 2; --m: 120px; background: var(--blanco); }
 
   .main { position: absolute; left: var(--m); top: 96px; width: 1040px; height: 790px; display: flex; flex-direction: column; }
-  .main .eyebrow { font-size: 24px; }
   .h1 { margin-top: 18px; font-family: var(--font-display); font-weight: 800; font-size: 72px; line-height: 1.12; color: var(--marino-logo); }
   .main .h2 { margin-top: 16px; font-size: 34px; }
 
@@ -27,7 +26,7 @@
   .photo-card .photo-wrap { position: absolute; inset: 0; }
 
   /* footer: one ascending S-curve as a rule (stroke only), footer line + wordmark */
-  .s-curve { top: 918px; height: 70px; }
+  .s-curve { bottom: 80px; }  /* shared rule keeps the 1440:110 aspect; lifted to clear the footer */
   .footer { position: absolute; left: var(--m); bottom: 40px; font-family: var(--font-cuerpo); font-weight: 600; font-size: 20px; line-height: 1.4; color: var(--texto-secundario); }
   .wordmark { position: absolute; right: var(--m); bottom: 38px; }
   .wordmark .logo { width: 132px; }
@@ -43,10 +42,10 @@
     <h1 class="h1" data-field="h1" data-label="H1" data-max="48" data-fit="48">How a TAB board meeting works</h1>
     <h2 class="h2" data-field="h2" data-label="H2" data-max="80" data-optional data-fit="28">Real issues, honest perspective, clear next steps</h2>
     <ol class="steps">
-      <li class="step"><span class="step-num">1</span><div><div class="step-title" data-field="s1_title" data-label="Step 1 title" data-max="32">Check in</div><div class="step-text" data-field="s1_text" data-label="Step 1 text" data-max="70" data-optional data-fit="22">Each owner shares wins, numbers and what’s on their mind.</div></div></li>
-      <li class="step"><span class="step-num">2</span><div><div class="step-title" data-field="s2_title" data-label="Step 2 title" data-max="32">Bring an issue</div><div class="step-text" data-field="s2_text" data-label="Step 2 text" data-max="70" data-optional data-fit="22">One member presents a real challenge or opportunity.</div></div></li>
-      <li class="step"><span class="step-num">3</span><div><div class="step-title" data-field="s3_title" data-label="Step 3 title" data-max="32">Get the board’s perspective</div><div class="step-text" data-field="s3_text" data-label="Step 3 text" data-max="70" data-optional data-fit="22">Peers ask hard questions and share what worked for them.</div></div></li>
-      <li class="step"><span class="step-num">4</span><div><div class="step-title" data-field="s4_title" data-label="Step 4 title" data-max="32">Commit to action</div><div class="step-text" data-field="s4_text" data-label="Step 4 text" data-max="70" data-optional data-fit="22">Leave with clear next steps, and report back next time.</div></div></li>
+      <li class="step"><span class="step-num">1</span><div><div class="step-title" data-field="s1_title" data-label="Step 1 title" data-max="32" data-help="Sample copy: confirm with TAB HQ">Check in</div><div class="step-text" data-field="s1_text" data-label="Step 1 text" data-max="70" data-help="Sample copy: confirm with TAB HQ" data-optional data-fit="22">Each owner shares wins, numbers and what’s on their mind.</div></div></li>
+      <li class="step"><span class="step-num">2</span><div><div class="step-title" data-field="s2_title" data-label="Step 2 title" data-max="32" data-help="Sample copy: confirm with TAB HQ">Bring an issue</div><div class="step-text" data-field="s2_text" data-label="Step 2 text" data-max="70" data-help="Sample copy: confirm with TAB HQ" data-optional data-fit="22">One member presents a real challenge or opportunity.</div></div></li>
+      <li class="step"><span class="step-num">3</span><div><div class="step-title" data-field="s3_title" data-label="Step 3 title" data-max="32" data-help="Sample copy: confirm with TAB HQ">Get the board’s perspective</div><div class="step-text" data-field="s3_text" data-label="Step 3 text" data-max="70" data-help="Sample copy: confirm with TAB HQ" data-optional data-fit="22">Peers ask hard questions and share what worked for them.</div></div></li>
+      <li class="step"><span class="step-num">4</span><div><div class="step-title" data-field="s4_title" data-label="Step 4 title" data-max="32" data-help="Sample copy: confirm with TAB HQ">Commit to action</div><div class="step-text" data-field="s4_text" data-label="Step 4 text" data-max="70" data-help="Sample copy: confirm with TAB HQ" data-optional data-fit="22">Leave with clear next steps, and report back next time.</div></div></li>
     </ol>
   </div>
 

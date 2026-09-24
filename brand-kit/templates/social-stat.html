@@ -9,15 +9,16 @@
   /* One big number as the hero. Orange on Marino is allowed at display size (7.6:1). */
   .artboard { --k: 2; background: var(--marino-fondo); }
 
-  .artboard .eyebrow { position: absolute; left: var(--m); top: var(--m); font-size: 24px; color: var(--blanco); max-width: 470px; }
+  /* eyebrow keeps the shared size (13px x --k) and dark-canvas orange; one line across the top */
+  .artboard .eyebrow { position: absolute; left: var(--m); right: var(--m); top: var(--m); }
 
   .number {
-    position: absolute; left: var(--m); top: 130px; width: 470px; height: 420px;
+    position: absolute; left: var(--m); top: 146px; width: 460px; height: 420px;
     font-family: var(--font-display); font-weight: 800; color: var(--naranja);
     font-size: 440px; line-height: 420px; letter-spacing: -0.02em; white-space: nowrap;
   }
 
-  .text { position: absolute; left: var(--m); right: var(--m); top: 604px; height: 250px; display: flex; flex-direction: column; justify-content: flex-start; }
+  .text { position: absolute; left: var(--m); right: var(--m); top: 614px; height: 250px; display: flex; flex-direction: column; justify-content: flex-start; }
   .label { font-family: var(--font-display); font-weight: 800; color: var(--blanco); font-size: 66px; line-height: 1.1; max-width: 936px; }
   .rule { margin-top: 40px; background: var(--naranja); }
 
@@ -25,8 +26,12 @@
   .logo-wrap { position: absolute; right: var(--m); bottom: var(--m); }
   .logo-wrap .logo { width: 220px; }
 
-  /* ---- Motif F: circular process ring (6 segments from -30deg, orange numbered dots on the borders) ---- */
-  .ring { --size: 440px; position: absolute; right: var(--m); top: var(--m); width: var(--size); height: var(--size); }
+  /* ---- Motif F: circular process ring (6 segments from -30deg, orange numbered dots on the borders,
+          white centre with orange ring and the programme mark). Labels: Montserrat 700 caps .18em. ---- */
+  .ring {
+    --size: 460px; --r-label: 154px; --dot: calc(22px * var(--k)); --r-dot: calc(var(--size) / 2 - 2px - var(--dot) / 2);
+    position: absolute; right: var(--m); top: 132px; width: var(--size); height: var(--size);
+  }
   .ring-disc {
     position: absolute; inset: 0; border-radius: 50%;
     background: conic-gradient(from -30deg,
@@ -36,33 +41,34 @@
   .ring-label, .ring-dot { position: absolute; left: 50%; top: 50%; }
   .ring-label {
     font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .18em;
-    font-size: 17px; color: var(--blanco); white-space: nowrap;
-    transform: translate(-50%, -50%) rotate(var(--a)) translateY(-150px) rotate(calc(var(--a) * -1));
+    font-size: calc(10px * var(--k)); line-height: 1; color: var(--blanco); white-space: nowrap;
+    transform: translate(-50%, -50%) rotate(var(--a)) translateY(calc(var(--r-label) * -1)) rotate(calc(var(--a) * -1));
   }
   .ring-dot {
-    width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%;
+    width: var(--dot); height: var(--dot); margin: calc(var(--dot) / -2) 0 0 calc(var(--dot) / -2); border-radius: 50%;
     background: var(--naranja); border: 3px solid var(--blanco);
-    color: var(--marino-logo); font-family: var(--font-cuerpo); font-weight: 800; font-size: 20px;
+    color: var(--marino-logo); font-family: var(--font-cuerpo); font-weight: 800; font-size: calc(10px * var(--k));
     display: flex; align-items: center; justify-content: center;
-    transform: rotate(var(--a)) translateY(-196px) rotate(calc(var(--a) * -1));
+    transform: rotate(var(--a)) translateY(calc(var(--r-dot) * -1)) rotate(calc(var(--a) * -1));
   }
   .ring-center {
-    position: absolute; left: 50%; top: 50%; width: 168px; height: 168px; margin: -84px 0 0 -84px;
+    position: absolute; left: 50%; top: 50%; width: 160px; height: 160px; margin: -80px 0 0 -80px;
     border-radius: 50%; background: var(--blanco); border: 6px solid var(--naranja-profundo);
     display: flex; align-items: center; justify-content: center;
   }
-  .ring-center .icon { width: 74px; }
-  .ring-center .icon .logo { width: 100%; }
+  /* StratPro text treatment (as in ui_kits/social/StratProPost.jsx); orange is display size here */
+  .stratpro-mark { font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1.02; text-align: center; color: var(--marino-logo); letter-spacing: .01em; }
+  .stratpro-mark span { color: var(--naranja-profundo); }
 
-  /* Plain variant: no ring, bigger number, label beside it */
+  /* Plain variant: no ring, bigger number */
   .artboard[data-variant="plain"] .ring { display: none; }
-  .artboard[data-variant="plain"] .number { top: 140px; width: 936px; height: 480px; font-size: 560px; line-height: 480px; }
-  .artboard[data-variant="plain"] .text { top: 650px; height: 200px; }
+  .artboard[data-variant="plain"] .number { top: 150px; width: 936px; height: 480px; font-size: 560px; line-height: 480px; }
+  .artboard[data-variant="plain"] .text { top: 660px; height: 200px; }
 </style>
 </head>
 <body>
 <main class="artboard on-dark" data-template="social-stat" data-variant="ring" style="width:1080px;height:1080px">
-  <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="30" data-optional>StratPro® by TAB</div>
+  <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="36" data-optional data-help="StratPro always carries its endorsement: “Brought to you by TAB”.">StratPro® · Brought to you by TAB</div>
 
   <div class="number" data-field="number" data-label="Number" data-max="6" data-fit="140" data-help="One number, max 6 characters (e.g. 6, 87%, 3x).">6</div>
 
@@ -71,7 +77,7 @@
     <span class="rule"></span>
   </div>
 
-  <p class="source" data-field="source" data-label="Source line" data-max="110" data-optional>The StratPro® cycle: Align · Vision · Diagnose · Plan · Execute · Optimize</p>
+  <p class="source" data-field="source" data-label="Source line" data-max="110" data-optional data-help="Where the number comes from, e.g. the report and year.">[Source, year]</p>
 
   <div class="ring" aria-hidden="true">
     <div class="ring-disc"></div>
@@ -87,7 +93,7 @@
     <div class="ring-dot" style="--a:150deg">4</div>
     <div class="ring-dot" style="--a:210deg">5</div>
     <div class="ring-dot" style="--a:270deg">6</div>
-    <div class="ring-center"><div class="icon"><img class="logo" data-logo="icon-color" src="../logos/tab-icon-color.svg" alt=""></div></div>
+    <div class="ring-center"><div class="stratpro-mark">STRAT<br><span>PRO</span></div></div>
   </div>
 
   <div class="logo-wrap">
@@ -105,6 +111,7 @@
   "photos": [],
   "rules": [
     "One number per post. Cite a real, checkable source in the source line.",
+    "StratPro always appears with its endorsement: “Brought to you by TAB”.",
     "Orange numbers are allowed here because they are display size on Marino (7.6:1). Never use orange for small text on white.",
     "Use the ring only when the stat is about the six-step StratPro cycle; otherwise choose 'Number only'.",
     "Label in sentence case, ideally one breath: 70 characters max."

@@ -46,6 +46,14 @@ body { background: var(--perla); }
 .duotone { background: var(--azul-tab); }
 .duotone .photo { filter: grayscale(1) contrast(1.05) brightness(1.08); mix-blend-mode: multiply; }
 
+/* Upload-only photo slot (case studies): until a real photo is set, show a labelled placeholder */
+.photo:not([src]), .photo[src=""] { display: none; }
+.photo-placeholder {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-cuerpo); font-weight: 700; color: var(--blanco); white-space: nowrap;
+}
+.photo[src]:not([src=""]) ~ .photo-placeholder { display: none; }
+
 /* ---------- Type roles ---------- */
 .eyebrow {
   font-family: var(--font-display);
@@ -83,7 +91,8 @@ body { background: var(--perla); }
 .on-dark .body-copy { color: var(--blanco); }
 
 .quote-text {
-  font-family: var(--font-editorial);
+  /* explicit stack: the token's Georgia fallback is a serif, and quotes must never fall back to serif */
+  font-family: 'IBM Plex Sans', 'Open Sans', Arial, sans-serif;
   font-style: italic;
   font-weight: 400;
 }
@@ -111,7 +120,7 @@ body { background: var(--perla); }
   font-family: var(--font-cuerpo);
   font-weight: 800;
   font-size: calc(12.5px * var(--k));
-  letter-spacing: .08em;
+  letter-spacing: .12em;
   text-transform: uppercase;
   line-height: 1.4;
   color: var(--blanco);
@@ -147,7 +156,11 @@ body { background: var(--perla); }
    export) clones <svg> subtrees without their computed styles. The fill path uses
    fill="currentColor", so a template sets the fill color with `.s-curve { color: ... }`;
    the stroke path carries stroke="#1A60AD" (= --azul-curva) and vector-effect="non-scaling-stroke". */
-.s-curve { position: absolute; left: 0; width: 100%; display: block; overflow: visible; color: var(--perla); }
+.s-curve {
+  position: absolute; left: 0; bottom: 0; width: 100%;
+  height: auto; aspect-ratio: 1440 / 110;   /* the reference path is never stretched */
+  display: block; overflow: visible; color: var(--perla);
+}
 
 /* ---------- Editor affordances (only active when the editor enables editing) ---------- */
 .tab-editing [data-field] { cursor: text; outline: none; }

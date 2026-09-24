@@ -11,48 +11,46 @@
   .artboard { --k: 2.4; --m: 120px; background: var(--perla); }
 
   .photo-wrap { bottom: auto; height: 540px; }
-  /* S-curve: Perla fill below the reference path + #1A60AD 6px stroke on the edge */
-  .s-curve { top: 370px; height: 180px; }
-  .s-curve { color: var(--perla); } /* fill = currentColor (see _template.css) */
+  /* S-curve sits at the bottom of the photo (shared .s-curve: bottom 0, true 1440:110 aspect):
+     Perla fill below the reference path + #1A60AD 6px stroke on the edge */
 
   .content { position: absolute; left: var(--m); right: var(--m); top: 520px; bottom: 84px; display: flex; gap: 96px; align-items: stretch; }
   .col-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; }
   .col-side { flex: 0 0 700px; display: flex; flex-direction: column; justify-content: flex-end; }
 
   .logo { width: 250px; margin-bottom: 40px; }
-  .eyebrow { font-size: 36px; color: var(--azul-tab); }
   .title { margin-top: 8px; font-family: var(--font-display); font-weight: 800; font-size: 164px; line-height: 1.04; letter-spacing: -0.015em; color: var(--marino-logo); white-space: nowrap; }
   .subtitle { margin-top: 14px; font-family: var(--font-cuerpo); font-weight: 600; font-size: 38px; line-height: 1.35; color: var(--texto-secundario); max-width: 1100px; }
 
   .details { display: flex; flex-direction: column; gap: 8px; }
   .detail { font-family: var(--font-cuerpo); font-weight: 700; font-size: 46px; line-height: 1.25; color: var(--marino-logo); white-space: nowrap; }
   .detail--muted { font-weight: 600; color: var(--texto-secundario); }
-  .details .rule { margin: 0 0 24px; width: 96px; height: 6px; }
-  .cta { align-self: flex-start; margin-top: 40px; font-size: 44px; padding: 30px 56px; border-radius: calc(var(--radio-boton) * 2); }
+  .details .rule { margin: 0 0 24px; }  /* shared rule x --k: 115 x 6 */
+  .cta { align-self: flex-start; margin-top: 40px; font-size: 44px; padding: 30px 56px; border-radius: calc(var(--radio-boton) * var(--k)); }
 </style>
 </head>
 <body>
 <main class="artboard" data-template="event-banner" style="width:2160px;height:1080px">
   <div class="photo-wrap">
     <img class="photo" data-photo="main" src="../photos/05-taste-of-tab.jpg" alt="" style="object-position:60% 12%">
+    <svg class="s-curve" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+      <path class="curve-fill" fill="currentColor" d="M0,86 C420,132 900,-14 1440,52 L1440,110 L0,110 Z"/>
+      <path class="curve-stroke" fill="none" stroke="#1A60AD" stroke-width="6" vector-effect="non-scaling-stroke" d="M0,86 C420,132 900,-14 1440,52"/>
+    </svg>
   </div>
-  <svg class="s-curve" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
-    <path class="curve-fill" fill="currentColor" d="M0,86 C420,132 900,-14 1440,52 L1440,110 L0,110 Z"/>
-    <path class="curve-stroke" fill="none" stroke="#1A60AD" stroke-width="6" vector-effect="non-scaling-stroke" d="M0,86 C420,132 900,-14 1440,52"/>
-  </svg>
 
   <div class="content">
     <div class="col-main" data-fit-box>
       <img class="logo" data-logo="color" src="../logos/tab-logo-color.svg" alt="TAB The Alternative Board">
       <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="24">Invitation only</div>
-      <h1 class="title" data-field="title" data-label="Event name" data-max="22" data-fit="110">Taste of TAB</h1>
+      <h1 class="title" data-field="event_name" data-label="Event name" data-max="22" data-fit="110">Taste of TAB</h1>
       <p class="subtitle" data-field="subtitle" data-label="Subtitle" data-max="70" data-optional data-fit="30">A sample peer advisory board session for business owners</p>
     </div>
     <div class="col-side">
       <div class="details">
         <span class="rule"></span>
-        <div class="detail" data-field="date" data-label="Date" data-max="28" data-fit="32">Thursday, October 15</div>
-        <div class="detail" data-field="time" data-label="Time" data-max="28" data-fit="32">7:30–9:30 AM</div>
+        <div class="detail" data-field="date" data-label="Date" data-max="28" data-fit="32">[Weekday, Month DD]</div>
+        <div class="detail" data-field="time" data-label="Time" data-max="28" data-fit="32">[Start–End time]</div>
         <div class="detail detail--muted" data-field="location" data-label="Location" data-max="30" data-fit="30">[Venue] · [City, ST]</div>
       </div>
       <div class="cta" data-field="cta" data-label="Button" data-max="24">Request your seat</div>

@@ -2,8 +2,8 @@
 /* ==========================================================================
    TAB batch renderer: HTML templates -> PNG at native size
 
-   Usage (from anywhere):
-     NODE_PATH=$(npm root -g) node brand-kit/tools/render.mjs [jobs.json] [options]
+   Usage (from anywhere; Playwright is resolved locally or from `npm root -g`):
+     node brand-kit/tools/render.mjs [jobs.json] [options]
 
    Options:
      --scale 2         deviceScaleFactor (default 1 = native pixel size)
@@ -48,7 +48,7 @@ for (let i = 0; i < argv.length; i++) {
   else opt.jobs = path.resolve(a);
 }
 
-/* ---------- playwright (globally installed; ESM ignores NODE_PATH, so use require) ---------- */
+/* ---------- playwright: local node_modules first, then the global npm root ---------- */
 function loadPlaywright() {
   const require = createRequire(import.meta.url);
   try { return require('playwright'); } catch { /* try the global root */ }
@@ -56,7 +56,7 @@ function loadPlaywright() {
     const root = execSync('npm root -g', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
     return require(path.join(root, 'playwright'));
   } catch {
-    console.error('Playwright not found. Run with: NODE_PATH=$(npm root -g) node brand-kit/tools/render.mjs');
+    console.error('Playwright not found in node_modules or in `npm root -g`. Install it (npm i -g playwright) and retry.');
     process.exit(1);
   }
 }
@@ -104,16 +104,27 @@ console.log(`Rendering ${selected.length} job(s) at ${opt.scale}x -> ${path.rela
 
 async function renderAsset(job) {
   // { "asset": "../logos/tab-logo-color.svg", "width": 600, "background": "#FFFFFF", "out": "tab-logo-color-600.png" }
-  const url = new URL(job.asset, `http://127.0.0.1:${port}/brand-kit/templates/`).href;
-  const out = path.resolve(opt.out, job.out || path.basename(job.asset).replace(/\.\w+$/, `-${job.width || 'native'}.png`));
+  const url = new URL(String(job.asset), `http://127.0.0.1:${port}/brand-kit/templates/`).href;
+  // only plain values reach the page: a hex/named color and a positive number
+  const background = /^#[0-9a-fA-F]{3,8}$|^[a-z]+$/.test(String(job.background || '')) ? job.background : 'transparent';
+  const width = Number(job.width) > 0 ? Math.min(Number(job.width), 8000) : undefined;
+  const out = path.resolve(opt.out, path.basename(String(job.out || path.basename(String(job.asset)).replace(/\.\w+$/, `-${width || 'native'}.png`))));
   const page = await context.newPage();
   try {
-    await page.setViewportSize({ width: Math.max(320, (job.width || 1000) + 40), height: 1200 });
-    await page.setContent(`<body style="margin:0;background:${job.background || 'transparent'}"><img id="a" src="${url}" style="display:block;${job.width ? 'width:' + job.width + 'px;height:auto' : ''}"></body>`);
-    await page.waitForFunction(() => { const i = document.getElementById('a'); return i.complete; });
+    await page.setViewportSize({ width: Math.max(320, (width || 1000) + 40), height: 1200 });
+    await page.setContent('<!doctype html><body style="margin:0"></body>');
+    await page.evaluate(({ url, background, width }) => {
+      document.body.style.background = background;
+      const img = document.createElement('img');
+      img.id = 'a'; img.style.display = 'block';
+      if (width) { img.style.width = width + 'px'; img.style.height = 'auto'; }
+      img.src = url;
+      document.body.appendChild(img);
+    }, { url, background, width });
+    await page.waitForFunction(() => { const i = document.getElementById('a'); return i && i.complete; });
     const w = await page.evaluate(() => document.getElementById('a').naturalWidth);
     if (!w) throw new Error('asset failed to load: ' + job.asset);
-    await page.locator('#a').screenshot({ path: out, omitBackground: !job.background });
+    await page.locator('#a').screenshot({ path: out, omitBackground: background === 'transparent' });
     const box = await page.locator('#a').boundingBox();
     console.log(`  ok ${path.relative(process.cwd(), out)} (${Math.round(box.width * opt.scale)}x${Math.round(box.height * opt.scale)}, asset)`);
   } finally { await page.close(); }
@@ -125,10 +136,11 @@ for (const job of selected) {
     continue;
   }
   const id = String(job.template).replace(/\.html$/, '');
+  if (!/^[\w-]+$/.test(id)) { console.error(`  x ${id}: invalid template id`); problems++; continue; }
   const file = path.join(BRAND_KIT, 'templates', id + '.html');
   if (!existsSync(file)) { console.error(`  x ${id}: template not found`); problems++; continue; }
   const suffix = opt.scale !== 1 ? '@' + opt.scale + 'x' : '';
-  const out = path.resolve(opt.out, job.out ? job.out.replace(/\.png$/i, suffix + '.png') : `${id}${job.variant ? '-' + job.variant : ''}${suffix}.png`);
+  const out = path.resolve(opt.out, job.out ? path.basename(String(job.out)).replace(/\.png$/i, suffix + '.png') : `${id}${job.variant ? '-' + job.variant : ''}${suffix}.png`);
   const page = await context.newPage();
   const logs = [];
   page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') logs.push(m.text()); });
@@ -137,6 +149,12 @@ for (const job of selected) {
     await page.goto(`http://127.0.0.1:${port}/brand-kit/templates/${id}.html`, { waitUntil: 'load' });
     await page.waitForFunction(() => window.TAB && window.TAB.ready, null, { timeout: 15000 });
     const size = await page.evaluate(() => window.TAB.size());
+    const policy = await page.evaluate(() => (window.TAB.meta || {}).photoPolicy || null);
+    if (policy === 'upload-only' && job.photo && /(^|\/)photos\/(candidates\/)?\d\d-/.test(job.photo)) {
+      problems++;
+      console.error(`  x ${id}: NOT RENDERED, this template only accepts the member's real photo, not brand library photos (${job.photo})`);
+      continue;
+    }
     await page.setViewportSize({ width: Math.max(320, size.width), height: Math.max(200, size.height) });
     await page.evaluate(j => window.TAB.apply(j), job);
     const report = await page.evaluate(() => window.TAB.ready());

@@ -10,12 +10,11 @@
      Brand lives in the top-right corner and in one low, subtle S-curve. */
   .artboard { --k: 2; --m: 96px; background: var(--blanco); }
 
-  .s-curve { bottom: 0; height: 240px; }
-  .s-curve { color: var(--perla); }
+  .s-curve { color: var(--perla); }  /* shared rule: bottom 0, true 1440:110 aspect */
 
   .brand { position: absolute; right: var(--m); top: 80px; width: 520px; display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
   .brand .logo { width: 300px; }
-  .brand .rule { margin: 28px 0 22px; }
+  .brand .rule { margin: 40px 0 22px; }  /* clear space ~ 0.132 x 300px lockup */
   .caption { font-family: var(--font-cuerpo); font-weight: 600; font-size: 26px; line-height: 1.4; color: var(--texto-secundario); }
   .logo--white { display: none; }
 
