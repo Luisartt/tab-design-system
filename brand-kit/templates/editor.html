@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAB Brand Studio</title>
+<!--
+  TAB Brand Studio: edit the brand templates in this folder and export PNGs.
+  Serve the REPO ROOT over http (templates link ../../styles.css), then open this page:
+    npx serve .                  ->  http://localhost:3000/brand-kit/templates/editor
+    python3 -m http.server 8000  ->  http://localhost:8000/brand-kit/templates/editor.html
+  Opening it as file:// usually fails: browsers block script access to file:// iframes.
+-->
+<link rel="icon" href="../logos/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+<header class="topbar">
+  <img class="topbar-logo" src="../logos/tab-wordmark-color.svg" alt="TAB">
+  <div class="topbar-title">
+    <span class="kicker">Brand Studio</span>
+    <span class="doc-title" id="doc-title">Loading…</span>
+  </div>
+  <a class="link-tertiary topbar-open" id="open-raw" href="#" target="_blank" rel="noopener">Open template</a>
+</header>
+
+<div class="banner" id="server-warning" role="alert" hidden>
+  <strong>The editor needs a local web server.</strong>
+  Browsers block access to templates opened as <code>file://</code>. From the repository root run
+  <code>npx serve .</code> or <code>python3 -m http.server 8000</code>, then open
+  <code>/brand-kit/templates/editor.html</code> on that address.
+</div>
+
+<div class="app">
+  <aside class="panel" aria-label="Editor controls">
+    <section class="section section--picker">
+      <h2 class="section-title">Template</h2>
+      <details class="picker" id="picker" open>
+        <summary class="picker-current" id="picker-current">
+          <span class="tpl-thumb"></span><span class="picker-text"><span class="tpl-name">Choose a template</span><span class="tpl-size"></span></span>
+          <span class="picker-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="template-grid" id="template-grid"></div>
+      </details>
+    </section>
+
+    <section class="section" id="sec-variant" hidden>
+      <h2 class="section-title">Style</h2>
+      <div class="segmented" id="variants" role="radiogroup" aria-label="Approved styles"></div>
+      <p class="helper">Colors are locked to the TAB palette: pick one of the approved styles.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">Content</h2>
+        <button type="button" class="btn-link" id="reset-content">Reset text</button>
+      </div>
+      <p class="helper helper--top">Type here or click any text in the preview.</p>
+      <div id="fields" class="fields"></div>
+    </section>
+
+    <section class="section" id="sec-photo" hidden>
+      <h2 class="section-title">Photo</h2>
+      <div class="photo-grid" id="photo-grid"></div>
+      <div class="focus" id="focus">
+        <div class="focus-head">
+          <span class="label">Focus point</span>
+          <button type="button" class="btn-link" id="focus-reset">Center</button>
+        </div>
+        <label class="slider"><span>Left ↔ right</span><input type="range" min="0" max="100" step="1" id="focus-x"><output id="focus-x-out">50%</output></label>
+        <label class="slider"><span>Top ↔ bottom</span><input type="range" min="0" max="100" step="1" id="focus-y"><output id="focus-y-out">50%</output></label>
+        <p class="helper">Move the photo inside its frame to keep faces clear of text.</p>
+      </div>
+    </section>
+  </aside>
+
+  <main class="stage" aria-label="Preview">
+    <div class="stage-bar">
+      <div class="stage-meta"><span id="size-label">–</span><span class="dot">·</span><span id="zoom-label">–</span></div>
+      <div class="stage-actions" id="stage-actions">
+        <button type="button" class="btn btn--secondary" id="share-link">Copy share link</button>
+        <button type="button" class="btn btn--secondary" id="copy-signature" hidden>Copy signature</button>
+        <button type="button" class="btn btn--primary" id="download-png">Download PNG</button>
+      </div>
+    </div>
+    <div class="preview" id="preview">
+      <div class="frame-wrap" id="frame-wrap">
+        <iframe id="frame" title="Template preview" allow="clipboard-write"></iframe>
+      </div>
+      <div class="loading" id="loading" hidden>Loading template…</div>
+    </div>
+  </main>
+
+  <aside class="checks" aria-labelledby="checks-title">
+    <h2 class="section-title" id="checks-title">Brand check</h2>
+    <p class="check-status" id="check-status" role="status" aria-live="polite"></p>
+    <ul class="check-issues" id="check-issues"></ul>
+    <h3 class="checks-sub">Rules for this template</h3>
+    <ul class="check-rules" id="check-rules"></ul>
+  </aside>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="editor.js"></script>
+</body>
+</html>

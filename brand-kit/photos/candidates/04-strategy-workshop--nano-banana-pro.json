@@ -1,0 +1,13 @@
+{
+  "id": "04-strategy-workshop",
+  "model": "nano-banana-pro",
+  "endpoint": "fal-ai/nano-banana-pro",
+  "aspect": "16:9",
+  "prompt": "A leadership team strategy workshop. Five managers of a mid-size company stand at a white wall covered with rows of colored sticky notes and a hand-drawn circular process sketch, with no legible writing anywhere. A woman facilitator in her thirties gestures toward the wall while two colleagues discuss and another adds a note. Energetic, collaborative, focused. Bright daylight office, people grouped in the right half of the frame.",
+  "style": "TAB house photography",
+  "seed": null,
+  "width": 2752,
+  "height": 1536,
+  "seconds": 29,
+  "generated_at": "2026-09-24T04:00:47.180Z"
+}

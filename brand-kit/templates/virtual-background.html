@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · Virtual background (1920×1080)</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  /* Zoom / Teams background. The person sits in the center-lower area: keep it quiet.
+     Brand lives in the top-right corner and in one low, subtle S-curve. */
+  .artboard { --k: 2; --m: 96px; background: var(--blanco); }
+
+  .s-curve { color: var(--perla); }  /* shared rule: bottom 0, true 1440:110 aspect */
+
+  .brand { position: absolute; right: var(--m); top: 80px; width: 520px; display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+  .brand .logo { width: 300px; }
+  .brand .rule { margin: 40px 0 22px; }  /* clear space ~ 0.132 x 300px lockup */
+  .caption { font-family: var(--font-cuerpo); font-weight: 600; font-size: 26px; line-height: 1.4; color: var(--texto-secundario); }
+  .logo--white { display: none; }
+
+  /* Dark: Marino Fondo canvas, Marino Profundo below the curve, white logo */
+  .artboard[data-variant="dark"] { background: var(--marino-fondo); }
+  .artboard[data-variant="dark"] .s-curve { color: var(--marino-profundo); }
+  .artboard[data-variant="dark"] .logo--color { display: none; }
+  .artboard[data-variant="dark"] .logo--white { display: block; }
+  .artboard[data-variant="dark"] .rule { background: var(--naranja); }
+  .artboard[data-variant="dark"] .caption { color: var(--cielo); }
+</style>
+</head>
+<body>
+<main class="artboard" data-template="virtual-background" data-variant="light" style="width:1920px;height:1080px">
+  <svg class="s-curve" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+    <path class="curve-fill" fill="currentColor" d="M0,86 C420,132 900,-14 1440,52 L1440,110 L0,110 Z"/>
+    <path class="curve-stroke" fill="none" stroke="#1A60AD" stroke-width="5" vector-effect="non-scaling-stroke" d="M0,86 C420,132 900,-14 1440,52"/>
+  </svg>
+
+  <div class="brand">
+    <img class="logo logo--color" data-logo="color" src="../logos/tab-logo-color.svg" alt="TAB The Alternative Board">
+    <img class="logo logo--white" data-logo="white" src="../logos/tab-logo-white.svg" alt="TAB The Alternative Board">
+    <span class="rule"></span>
+    <div class="caption" data-field="caption" data-label="Caption" data-max="60" data-multiline data-optional data-help="E.g. your name and role. Zoom mirrors your self-view; others see it correctly.">Peer advisory boards and coaching<br>for business owners</div>
+  </div>
+</main>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "Virtual background",
+  "group": "Meetings",
+  "size": [1920, 1080],
+  "motif": "A · Subtle S-curve",
+  "variants": { "light": "Light (white)", "dark": "Dark (Marino)" },
+  "photos": [],
+  "rules": [
+    "Keep the center and lower half quiet: that's where you sit.",
+    "Zoom mirrors your own preview, so text looks reversed to you but reads correctly for everyone else.",
+    "Light version for bright rooms; dark version when your camera exposes for a dim room.",
+    "One S-curve per piece, ascending left to right."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+</body>
+</html>

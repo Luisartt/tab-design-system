@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · Social post · Quote (1080×1080)</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  /* Motif B: diagonal orange corner cuts + white notch, 45deg #002F5A diamond holding the logo */
+  .artboard { --k: 2; background: var(--marino-fondo); }
+
+  .corner { position: absolute; }
+  .corner--tr { top: 0; right: 0; width: 250px; height: 250px; background: var(--naranja); clip-path: polygon(100% 0, 0 0, 100% 100%); }
+  .corner--notch { top: 0; right: 0; width: 150px; height: 150px; background: var(--blanco); clip-path: polygon(100% 0, 0 0, 100% 100%); }
+  .corner--bl { bottom: 0; left: 0; width: 170px; height: 170px; background: var(--naranja); clip-path: polygon(0 100%, 0 0, 100% 100%); }
+
+  .diamond {
+    position: absolute; left: 610px; top: 640px; width: 330px; height: 330px;
+    background: var(--marino-profundo); transform: rotate(45deg);
+  }
+  .diamond-logo { position: absolute; left: 610px; top: 640px; width: 330px; height: 330px; display: flex; align-items: center; justify-content: center; }
+  .diamond-logo .logo { width: 220px; }
+
+  .content {
+    position: absolute; left: var(--m); top: var(--m); width: 860px; height: 690px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .qmark {
+    font-family: var(--font-display); font-weight: 800; color: var(--naranja);
+    font-size: 220px; line-height: .62; height: 104px; margin-bottom: 12px;
+  }
+  .quote-text { color: var(--blanco); font-size: 66px; line-height: 1.3; }
+  .rule { margin: 48px 0 28px; background: var(--naranja); }
+  .attribution { font-family: var(--font-cuerpo); font-weight: 700; font-size: 28px; line-height: 1.35; color: var(--blanco); max-width: 520px; }
+  .detail { font-family: var(--font-cuerpo); font-weight: 600; font-size: 24px; line-height: 1.4; color: var(--cielo); margin-top: 6px; max-width: 520px; }
+
+  /* Light variant ("Clara" testimonial): white canvas, no Motif B, #1A60AD rule, color logo */
+  .artboard[data-variant="light"] { background: var(--blanco); }
+  .artboard[data-variant="light"] .corner,
+  .artboard[data-variant="light"] .diamond,
+  .artboard[data-variant="light"] .logo--white { display: none; }
+  .artboard:not([data-variant="light"]) .logo--color { display: none; }
+  .artboard[data-variant="light"] .diamond-logo { left: auto; right: var(--m); top: auto; bottom: var(--m); width: auto; height: auto; }
+  .artboard[data-variant="light"] .diamond-logo .logo { width: 240px; }
+  .artboard[data-variant="light"] .quote-text { color: var(--marino-logo); }
+  .artboard[data-variant="light"] .rule { background: var(--azul-curva); }
+  .artboard[data-variant="light"] .attribution { color: var(--marino-logo); }
+  .artboard[data-variant="light"] .detail { color: var(--texto-secundario); }
+  .artboard[data-variant="light"] .content { height: 760px; }
+</style>
+</head>
+<body>
+<main class="artboard" data-template="social-quote" data-variant="navy" style="width:1080px;height:1080px">
+  <div class="corner corner--tr"></div>
+  <div class="corner corner--notch"></div>
+  <div class="corner corner--bl"></div>
+  <div class="diamond"></div>
+  <div class="diamond-logo">
+    <img class="logo logo--white" data-logo="white" src="../logos/tab-logo-white.svg" alt="TAB The Alternative Board">
+    <img class="logo logo--color" data-logo="color" src="../logos/tab-logo-color.svg" alt="TAB The Alternative Board">
+  </div>
+
+  <div class="content" data-fit-box>
+    <div class="qmark" aria-hidden="true">&ldquo;</div>
+    <p class="quote-text" data-field="quote" data-label="Quote" data-max="140" data-multiline data-fit="34" data-help="Use real, approved words. Never invent a quote for a real person.">Strategy matters, but alignment is what turns strategy into movement.</p>
+    <span class="rule"></span>
+    <div class="attribution" data-field="attribution" data-label="Attribution" data-max="48">StratPro® · Brought to you by TAB</div>
+    <div class="detail" data-field="detail" data-label="Role / company" data-max="48" data-optional></div>
+  </div>
+</main>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "Social post · Quote",
+  "group": "Social",
+  "size": [1080, 1080],
+  "motif": "B · Diagonal cuts + diamond",
+  "variants": { "navy": "Marino (Motif B)", "light": "Light (white)" },
+  "photos": [],
+  "rules": [
+    "Only publish words someone actually said or wrote, with their approval. Never invent a quote for a real person.",
+    "Quotes are IBM Plex Sans italic; the quote mark is Montserrat 800 in orange (display size only).",
+    "Motif B (orange corners + #002F5A diamond) belongs on the Marino canvas only.",
+    "Keep quotes under 140 characters; the text shrinks to fit, but shorter reads better.",
+    "No emoji, no exclamation chains."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · Social post · Photo veil (1080×1350)</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  /* Motif C: real photo + navy veil (90deg), white text on the left */
+  .artboard { --k: 2; background: var(--marino-fondo); }
+  .logo-wrap { position: absolute; left: var(--m); top: var(--m); }
+  .logo-wrap .logo { width: 240px; }
+
+  /* Text column stays inside the dense part of the veil (<= ~45% of the width) */
+  .content {
+    position: absolute; left: var(--m); bottom: var(--m); top: 300px;
+    width: 414px;   /* right edge 486px = 45% of 1080: inside the dense part of the veil */
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .content .eyebrow { margin-bottom: 28px; }
+  .content .display { font-size: 80px; line-height: 1.06; }
+  .content .rule { margin: 44px 0 40px; }
+  .content .body-copy { font-size: 30px; line-height: 1.45; }
+
+  /* Variants: accent color only (orange rule + eyebrow, or blue rule + blue eyebrow) */
+  .artboard[data-variant="orange"] .rule { background: var(--naranja); }
+  .artboard[data-variant="orange"] .eyebrow { color: var(--naranja); }
+  .artboard[data-variant="blue"] .rule { background: var(--azul-curva); }
+  .artboard[data-variant="blue"] .eyebrow { color: var(--cielo); }
+</style>
+</head>
+<body>
+<main class="artboard on-dark" data-template="social-photo-veil" data-variant="orange" style="width:1080px;height:1350px">
+  <div class="photo-wrap">
+    <img class="photo" data-photo="main" src="../photos/02-coaching.jpg" alt="" style="object-position:62% 50%">
+  </div>
+  <div class="veil"></div>
+
+  <div class="logo-wrap">
+    <img class="logo" data-logo="white" src="../logos/tab-logo-white.svg" alt="TAB The Alternative Board">
+  </div>
+
+  <div class="content" data-fit-box>
+    <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="18" data-optional>Business owners</div>
+    <h1 class="display" data-field="headline" data-label="Headline" data-max="60" data-fit="52">You don’t have to figure it out alone</h1>
+    <span class="rule"></span>
+    <p class="body-copy" data-field="body" data-label="Body (1–2 lines)" data-max="110" data-multiline data-optional data-fit="24">A board of fellow business owners brings perspective, accountability and honest advice.</p>
+  </div>
+</main>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "Social post · Photo veil",
+  "group": "Social",
+  "size": [1080, 1350],
+  "motif": "C · Photo with navy veil",
+  "variants": { "orange": "Orange accent", "blue": "Blue accent" },
+  "photos": ["02-coaching", "01-peer-board", "03-owner"],
+  "rules": [
+    "White text sits on the left over the navy veil. Use the focus sliders to keep faces in the right half, clear of the text.",
+    "One idea per post: sentence-case headline, 60 characters max, no exclamation chains.",
+    "Real people in real working settings. Never a flat illustration as the only image.",
+    "White logo only on the veil; the color logo never goes on dark.",
+    "Everything stays inside the 72px safe margin."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · LinkedIn cover (1584×396)</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  /* Company page / profile banner. The bottom-left 420x120 stays calm: the profile
+     photo (personal) or page logo (company) overlaps it on LinkedIn. */
+  .artboard { --k: 2; --m: 96px; background: var(--marino-fondo); }
+
+  .content { position: absolute; left: var(--m); top: 52px; width: 780px; height: 224px; display: flex; flex-direction: column; }
+  .content .logo { width: 190px; }
+  /* clear space under the lockup ~ 0.132 x its width (190px -> 25px) */
+  .content .rule { margin: 28px 0 22px; }
+  .tagline { font-family: var(--font-display); font-weight: 800; line-height: 1.1; }
+
+  /* ---- veil (default, Motif C): full-bleed photo + navy veil, white type kept inside the dense veil ---- */
+  .artboard[data-variant="veil"] .tagline { color: var(--blanco); font-size: 34px; max-width: 540px; }
+  .artboard[data-variant="veil"] .rule { background: var(--naranja); }
+  .artboard[data-variant="veil"] .panel,
+  .artboard[data-variant="veil"] .logo--color { display: none; }
+
+  /* ---- duotone (Motif D): white panel with a white diagonal cut over a duotone photo ---- */
+  .artboard[data-variant="duotone"] { background: var(--blanco); }
+  .artboard[data-variant="duotone"] .photo-wrap { left: 840px; background: var(--azul-tab); }
+  .artboard[data-variant="duotone"] .photo { filter: grayscale(1) contrast(1.05) brightness(1.08); mix-blend-mode: multiply; }
+  .artboard[data-variant="duotone"] .veil,
+  .artboard[data-variant="duotone"] .logo--white { display: none; }
+  .artboard[data-variant="duotone"] .tagline { color: var(--marino-logo); font-size: 40px; max-width: 780px; }
+  .panel { position: absolute; left: 0; top: 0; width: 1010px; height: 100%; background: var(--blanco); clip-path: polygon(0 0, 100% 0, 88.1% 100%, 0 100%); }
+</style>
+</head>
+<body>
+<main class="artboard" data-template="linkedin-cover" data-variant="veil" style="width:1584px;height:396px">
+  <div class="photo-wrap">
+    <img class="photo" data-photo="main" src="../photos/01-peer-board.jpg" alt="" style="object-position:65% 32%">
+  </div>
+  <div class="veil"></div>
+  <div class="panel"></div>
+
+  <div class="content" data-fit-box>
+    <img class="logo logo--white" data-logo="white" src="../logos/tab-logo-white.svg" alt="TAB The Alternative Board">
+    <img class="logo logo--color" data-logo="color" src="../logos/tab-logo-color.svg" alt="TAB The Alternative Board">
+    <span class="rule"></span>
+    <p class="tagline" data-field="tagline" data-label="Tagline" data-max="56" data-fit="28">Peer advisory boards and coaching for business owners</p>
+  </div>
+</main>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "LinkedIn cover",
+  "group": "LinkedIn",
+  "size": [1584, 396],
+  "motif": "C · Photo veil (default), or D · Duotone + white diagonal cut",
+  "variants": { "veil": "Photo with veil", "duotone": "White + duotone" },
+  "photos": ["01-peer-board", "05-taste-of-tab", "04-strategy-workshop"],
+  "rules": [
+    "Keep the bottom-left 420 x 120 px area empty: LinkedIn places the profile photo or page logo there.",
+    "Only use approved taglines. 'Better businesses. Better lives.' is not verified TAB copy; don't use it.",
+    "LinkedIn crops banners differently on mobile: preview on a phone before publishing.",
+    "White logo on the veil; color logo on the white duotone layout."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+</body>
+</html>
