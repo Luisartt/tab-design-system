@@ -211,3 +211,7 @@ textarea.input { resize: vertical; min-height: 72px; }
   border-radius: var(--radio-boton); box-shadow: var(--sombra-elevada); transition: opacity .15s; z-index: 10;
 }
 .toast.is-error { background: var(--error); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

@@ -112,6 +112,7 @@
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--marino-logo);color:#fff;padding:10px 18px;border-radius:var(--radio-boton);font-weight:600;font-size:14px;transition:opacity .15s,transform .15s;pointer-events:none;z-index:20}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
   @media (max-width:900px){
     .g3,.g4{grid-template-columns:repeat(2,1fr)}
     .photos{grid-template-columns:1fr 1fr}
