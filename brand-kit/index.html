@@ -268,9 +268,9 @@
         <span class="pill">Lotes</span>
         <h3>Render por lotes</h3>
         <p class="caption" style="margin-top:var(--esp-2)">Un JSON con textos y fotos, un PNG por pieza. Ideal para calendarios de contenido.</p>
-        <pre><code>cd brand-kit/tools
-NODE_PATH=$(npm root -g) \
-  node render.mjs</code></pre>
+        <pre><code># desde la raíz del repo
+node brand-kit/tools/render.mjs
+node brand-kit/tools/render.mjs --only social-quote --scale 2</code></pre>
       </div></div>
       <div class="card"><div class="body">
         <span class="pill">Nuevas fotos</span>
@@ -366,13 +366,23 @@ FAL_KEY=... NODE_USE_ENV_PROXY=1 \
     ph.appendChild(c);
   });
 
-  // Filled once the template set is rendered to exports/.
-  const TEMPLATES = [];
+  const TEMPLATES = [
+    { file: 'social-photo-veil', name: 'Post con foto y velo', size: '1080 × 1350', use: 'Instagram y LinkedIn vertical.', png: 'social-photo-veil.png' },
+    { file: 'social-quote', name: 'Post de cita', size: '1080 × 1080', use: 'Frases de marca o de programa. Nunca citas inventadas de personas reales.', png: 'social-quote.png' },
+    { file: 'social-stat', name: 'Post de dato', size: '1080 × 1080', use: 'Un número protagonista, con rueda de proceso opcional.', png: 'social-stat.png' },
+    { file: 'case-study-link', name: 'Case study', size: '1200 × 627', use: 'Imagen de enlace para LinkedIn. Va con la foto real del miembro.', png: 'case-study-link.png' },
+    { file: 'linkedin-cover', name: 'Portada de LinkedIn', size: '1584 × 396', use: 'Página de empresa o perfil personal.', png: 'linkedin-cover.png' },
+    { file: 'event-banner', name: 'Banner de evento', size: '2160 × 1080', use: 'Cabecera de Eventbrite para Taste of TAB.', png: 'event-banner.png' },
+    { file: 'virtual-background', name: 'Fondo virtual', size: '1920 × 1080', use: 'Zoom y Teams, versión clara u oscura.', png: 'virtual-background.png' },
+    { file: 'slide-title', name: 'Portada de presentación', size: '1920 × 1080', use: 'Abre cualquier deck con foto y velo o fondo marino.', png: 'slide-title.png' },
+    { file: 'slide-content', name: 'Diapositiva de contenido', size: '1920 × 1080', use: 'Pasos numerados con foto o solo texto.', png: 'slide-content.png' },
+    { file: 'email-signature', name: 'Firma de correo', size: '640 × 230', use: 'Gmail y Outlook. Copia y pega.', png: 'email-signature.png' },
+  ];
   const tp = document.getElementById('templates');
   TEMPLATES.forEach((t) => {
     const c = document.createElement('div');
     c.className = 'card tpl';
-    c.innerHTML = `<img src="exports/${t.png}" alt="${t.name}" loading="lazy"><div class="body"><span class="pill">${t.size}</span><h3>${t.name}</h3><p class="caption" style="margin:4px 0 8px">${t.use}</p><a class="link" href="templates/editor.html#template=${t.file}">Editar</a></div>`;
+    c.innerHTML = `<img src="exports/${t.png}" alt="${t.name}" loading="lazy"><div class="body"><span class="pill">${t.size}</span><h3>${t.name}</h3><p class="caption" style="margin:4px 0 8px">${t.use}</p><a class="link" href="templates/editor.html#${encodeURIComponent(JSON.stringify({ template: t.file }))}">Editar</a></div>`;
     tp.appendChild(c);
   });
 

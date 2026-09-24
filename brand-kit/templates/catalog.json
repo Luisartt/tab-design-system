@@ -1,0 +1,21 @@
+{
+  "templates": [
+    { "id": "social-photo-veil", "name": "Photo veil post", "group": "Social", "size": [1080, 1350], "use": "Instagram / LinkedIn portrait" },
+    { "id": "social-quote", "name": "Quote post", "group": "Social", "size": [1080, 1080], "use": "Square quote card" },
+    { "id": "social-stat", "name": "Stat post", "group": "Social", "size": [1080, 1080], "use": "One big number" },
+    { "id": "case-study-link", "name": "Case study link", "group": "LinkedIn", "size": [1200, 627], "use": "LinkedIn link image" },
+    { "id": "linkedin-cover", "name": "LinkedIn cover", "group": "LinkedIn", "size": [1584, 396], "use": "Page / profile banner" },
+    { "id": "event-banner", "name": "Event banner", "group": "Events", "size": [2160, 1080], "use": "Eventbrite header" },
+    { "id": "virtual-background", "name": "Virtual background", "group": "Meetings", "size": [1920, 1080], "use": "Zoom / Teams" },
+    { "id": "slide-title", "name": "Title slide", "group": "Presentations", "size": [1920, 1080], "use": "Deck opener" },
+    { "id": "slide-content", "name": "Content slide", "group": "Presentations", "size": [1920, 1080], "use": "Steps + photo" },
+    { "id": "email-signature", "name": "Email signature", "group": "Email", "size": [640, 230], "use": "Gmail / Outlook" }
+  ],
+  "photos": [
+    { "id": "01-peer-board", "src": "../photos/01-peer-board.jpg", "label": "Peer board meeting", "aspect": "16:9", "focus": [65, 55] },
+    { "id": "02-coaching", "src": "../photos/02-coaching.jpg", "label": "1:1 coaching", "aspect": "4:5", "focus": [68, 62] },
+    { "id": "03-owner", "src": "../photos/03-owner.jpg", "label": "Business owner", "aspect": "4:5", "focus": [58, 45] },
+    { "id": "04-strategy-workshop", "src": "../photos/04-strategy-workshop.jpg", "label": "Strategy workshop", "aspect": "16:9", "focus": [68, 48] },
+    { "id": "05-taste-of-tab", "src": "../photos/05-taste-of-tab.jpg", "label": "Taste of TAB", "aspect": "16:9", "focus": [60, 45] }
+  ]
+}

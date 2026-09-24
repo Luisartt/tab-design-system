@@ -27,6 +27,17 @@ La guía pide fotografía real. Estas imágenes son generadas, así que se trata
 - Nunca en case studies, testimonios o cualquier pieza con el nombre de una persona real. Ahí va la foto real del miembro.
 - La IA genera solo la foto. Logo, texto y motivos se agregan en las plantillas, así nunca salen letras deformes ni logos falsos.
 
+## Render por lotes
+
+```bash
+# desde la raíz del repo; usa templates/examples.json por defecto
+node brand-kit/tools/render.mjs
+node brand-kit/tools/render.mjs mis-piezas.json --scale 2 --out ./salida
+node brand-kit/tools/render.mjs --list
+```
+
+Cada trabajo del JSON es `{ "template", "variant", "fields": {...}, "photo", "out" }`. El render falla a propósito si Montserrat, Open Sans o IBM Plex Sans no cargan, para que nunca salga una pieza con fuente de sistema.
+
 ## Generar más fotos
 
 ```bash

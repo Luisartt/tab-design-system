@@ -1,0 +1,160 @@
+/* ==========================================================================
+   TAB brand templates: shared artboard styles
+   Every template links ../../styles.css (fonts + tokens) and then this file.
+   Values come from tokens; nothing here introduces a new color or font.
+
+   Scale: the guide's type/rule values are specified at 1x (web). Artboards
+   that are viewed smaller than their pixel size (social 1080, slides 1920,
+   banners) set --k on .artboard (default 2) and components scale with it.
+   ========================================================================== */
+
+html, body { margin: 0; padding: 0; }
+body { background: var(--perla); }
+
+.artboard {
+  --k: 2;                       /* display scale factor, see header */
+  --m: var(--social-margen);    /* safe margin (72px on social canvases) */
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: var(--blanco);
+  color: var(--marino-logo);
+  font-family: var(--font-cuerpo);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.artboard *, .artboard *::before, .artboard *::after { box-sizing: border-box; }
+.artboard h1, .artboard h2, .artboard h3, .artboard p, .artboard ul, .artboard ol { margin: 0; padding: 0; }
+
+/* Balanced headlines (no one-word widows), tidy paragraphs */
+.artboard h1, .artboard h2, .artboard .display, .artboard .quote-text, .artboard .tagline, .artboard .label { text-wrap: balance; }
+.artboard p { text-wrap: pretty; }
+
+/* Optional fields left empty are removed from the layout */
+.artboard [data-empty] { display: none !important; }
+
+/* ---------- Photo layers (Motif C veil, Motif D duotone) ---------- */
+.photo-wrap { position: absolute; inset: 0; overflow: hidden; }
+.photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+}
+.veil { position: absolute; inset: 0; background: var(--velo-foto); pointer-events: none; }
+.duotone { background: var(--azul-tab); }
+.duotone .photo { filter: grayscale(1) contrast(1.05) brightness(1.08); mix-blend-mode: multiply; }
+
+/* ---------- Type roles ---------- */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: var(--eyebrow-weight);
+  font-size: calc(var(--eyebrow-size) * var(--k));
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--azul-tab);
+}
+.on-dark .eyebrow, .eyebrow.on-dark { color: var(--naranja); }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: var(--display-lh);
+  letter-spacing: -0.01em;
+  color: var(--marino-logo);
+}
+.on-dark .display { color: var(--blanco); }
+
+.h2 {
+  font-family: var(--font-cuerpo);
+  font-weight: 800;
+  line-height: var(--h2-lh);
+  color: var(--azul-accion);
+}
+
+.body-copy {
+  font-family: var(--font-cuerpo);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--marino-logo);
+}
+.on-dark .body-copy { color: var(--blanco); }
+
+.quote-text {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.caption {
+  font-family: var(--font-cuerpo);
+  font-weight: 600;
+  color: var(--texto-secundario);
+}
+.on-dark .caption { color: var(--cielo); }
+
+/* ---------- Motif E: short rule (48 x 2.5 at 1x) ---------- */
+.rule {
+  display: block;
+  flex: none;
+  width: calc(48px * var(--k));
+  height: calc(2.5px * var(--k));
+  background: var(--azul-curva);   /* #1A60AD: stroke/rule only */
+}
+.rule--orange { background: var(--naranja); }
+
+/* ---------- Motif E: pill badge ---------- */
+.pill {
+  display: inline-block;
+  font-family: var(--font-cuerpo);
+  font-weight: 800;
+  font-size: calc(12.5px * var(--k));
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--blanco);
+  background: var(--marino-logo);
+  padding: calc(6px * var(--k)) calc(14px * var(--k));
+  border-radius: var(--radio-pill);
+  white-space: nowrap;
+}
+.pill--blue { background: var(--azul-accion); }
+
+/* ---------- Orange CTA (never white text on orange) ---------- */
+.cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-cuerpo);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--marino-logo);
+  background: var(--naranja);
+  border-radius: var(--radio-boton);
+  white-space: nowrap;
+}
+
+/* ---------- Logos ---------- */
+.logo { display: block; height: auto; max-width: none; }
+/* Fallback knockout for the 2-color PNG (alpha channel -> clean white) */
+.logo.knockout { filter: brightness(0) invert(1); }
+/* Icon fallback: crop the icon out of the full PNG logo */
+.icon-crop { position: relative; overflow: hidden; }
+.icon-crop > img.logo { position: absolute; left: 0; top: 0; width: 351%; }
+
+/* ---------- Motif A: S-curve ----------
+   Path styling lives in SVG presentation attributes, not CSS classes: html-to-image (editor
+   export) clones <svg> subtrees without their computed styles. The fill path uses
+   fill="currentColor", so a template sets the fill color with `.s-curve { color: ... }`;
+   the stroke path carries stroke="#1A60AD" (= --azul-curva) and vector-effect="non-scaling-stroke". */
+.s-curve { position: absolute; left: 0; width: 100%; display: block; overflow: visible; color: var(--perla); }
+
+/* ---------- Editor affordances (only active when the editor enables editing) ---------- */
+.tab-editing [data-field] { cursor: text; outline: none; }
+.tab-editing [data-field]:hover { box-shadow: 0 0 0 2px rgba(15,117,188,.45); }
+.tab-editing [data-field]:focus { box-shadow: 0 0 0 3px rgba(15,117,188,.65); }
+.tab-exporting [data-field], .tab-exporting [data-field]:hover, .tab-exporting [data-field]:focus { box-shadow: none !important; }
+
+/* Page chrome that lives outside the artboard (e.g. "Copy signature") */
+.tpl-chrome { font-family: var(--font-cuerpo); }
+html.tab-embedded .tpl-chrome { display: none; }

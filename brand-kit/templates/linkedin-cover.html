@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · LinkedIn cover (1584×396)</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  /* Company page / profile banner. The bottom-left 420x120 stays calm: the profile
+     photo (personal) or page logo (company) overlaps it on LinkedIn. */
+  .artboard { --k: 2; --m: 96px; background: var(--perla); }
+
+  .content { position: absolute; left: var(--m); top: 52px; width: 780px; height: 224px; display: flex; flex-direction: column; }
+  .content .logo { width: 190px; }
+  .content .rule { margin: 22px 0 22px; }
+  .tagline { font-family: var(--font-display); font-weight: 800; font-size: 40px; line-height: 1.1; color: var(--marino-logo); max-width: 780px; }
+  .logo--white { display: none; }
+
+  /* ---- split (default): Perla panel + photo, diagonal cut with a #1A60AD edge stroke ---- */
+  .photo-wrap { left: 860px; }
+  .cut { position: absolute; left: 0; top: 0; width: 1010px; height: 100%; background: var(--perla); clip-path: polygon(0 0, 100% 0, 88.1% 100%, 0 100%); }
+  .cut-edge { position: absolute; left: 0; top: 0; width: 1010px; height: 100%; pointer-events: none; overflow: visible; }
+
+  /* ---- veil: full-bleed photo + navy veil, white type (3 lines, stays in the dense veil) ---- */
+  .artboard[data-variant="veil"] .photo-wrap { left: 0; }
+  .artboard[data-variant="veil"] .cut,
+  .artboard[data-variant="veil"] .cut-edge,
+  .artboard[data-variant="veil"] .logo--color { display: none; }
+  .artboard[data-variant="veil"] .logo--white { display: block; }
+  .artboard:not([data-variant="veil"]) .veil { display: none; }
+  .artboard[data-variant="veil"] .tagline { color: var(--blanco); font-size: 34px; max-width: 540px; }
+  .artboard[data-variant="veil"] .rule { background: var(--naranja); }
+</style>
+</head>
+<body>
+<main class="artboard" data-template="linkedin-cover" data-variant="split" style="width:1584px;height:396px">
+  <div class="photo-wrap">
+    <img class="photo" data-photo="main" src="../photos/01-peer-board.jpg" alt="" style="object-position:65% 32%">
+  </div>
+  <div class="veil"></div>
+  <div class="cut"></div>
+  <svg class="cut-edge" viewBox="0 0 1010 396" aria-hidden="true"><line x1="1010" y1="0" x2="890" y2="396" stroke="#1A60AD" stroke-width="5"/></svg>
+
+  <div class="content" data-fit-box>
+    <img class="logo logo--color" data-logo="color" src="../logos/tab-logo-color.svg" alt="TAB The Alternative Board">
+    <img class="logo logo--white" data-logo="white" src="../logos/tab-logo-white.svg" alt="TAB The Alternative Board">
+    <span class="rule"></span>
+    <p class="tagline" data-field="tagline" data-label="Tagline" data-max="56" data-fit="28">Peer advisory boards and coaching for business owners</p>
+  </div>
+</main>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "LinkedIn cover",
+  "group": "LinkedIn",
+  "size": [1584, 396],
+  "motif": "C · Photo (split with diagonal cut, or veil)",
+  "variants": { "split": "Perla + photo", "veil": "Photo with veil" },
+  "photos": ["01-peer-board", "05-taste-of-tab", "04-strategy-workshop"],
+  "rules": [
+    "Keep the bottom-left 420 x 120 px area empty: LinkedIn places the profile photo or page logo there.",
+    "Only use approved taglines. 'Better businesses. Better lives.' is not verified TAB copy; don't use it.",
+    "LinkedIn crops banners differently on mobile: preview on a phone before publishing.",
+    "Color logo on Perla; white logo only on the veil."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+</body>
+</html>

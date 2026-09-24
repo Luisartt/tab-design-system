@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · Event banner · Taste of TAB (2160×1080)</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  /* Taste of TAB: Perla canvas, photo on top, ONE ascending S-curve (Motif A) between photo and content.
+     Eventbrite shows this at ~940px wide on desktop and ~360px on phones, so type is large. */
+  .artboard { --k: 2.4; --m: 120px; background: var(--perla); }
+
+  .photo-wrap { bottom: auto; height: 540px; }
+  /* S-curve: Perla fill below the reference path + #1A60AD 6px stroke on the edge */
+  .s-curve { top: 370px; height: 180px; }
+  .s-curve { color: var(--perla); } /* fill = currentColor (see _template.css) */
+
+  .content { position: absolute; left: var(--m); right: var(--m); top: 520px; bottom: 84px; display: flex; gap: 96px; align-items: stretch; }
+  .col-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; }
+  .col-side { flex: 0 0 700px; display: flex; flex-direction: column; justify-content: flex-end; }
+
+  .logo { width: 250px; margin-bottom: 40px; }
+  .eyebrow { font-size: 36px; color: var(--azul-tab); }
+  .title { margin-top: 8px; font-family: var(--font-display); font-weight: 800; font-size: 164px; line-height: 1.04; letter-spacing: -0.015em; color: var(--marino-logo); white-space: nowrap; }
+  .subtitle { margin-top: 14px; font-family: var(--font-cuerpo); font-weight: 600; font-size: 38px; line-height: 1.35; color: var(--texto-secundario); max-width: 1100px; }
+
+  .details { display: flex; flex-direction: column; gap: 8px; }
+  .detail { font-family: var(--font-cuerpo); font-weight: 700; font-size: 46px; line-height: 1.25; color: var(--marino-logo); white-space: nowrap; }
+  .detail--muted { font-weight: 600; color: var(--texto-secundario); }
+  .details .rule { margin: 0 0 24px; width: 96px; height: 6px; }
+  .cta { align-self: flex-start; margin-top: 40px; font-size: 44px; padding: 30px 56px; border-radius: calc(var(--radio-boton) * 2); }
+</style>
+</head>
+<body>
+<main class="artboard" data-template="event-banner" style="width:2160px;height:1080px">
+  <div class="photo-wrap">
+    <img class="photo" data-photo="main" src="../photos/05-taste-of-tab.jpg" alt="" style="object-position:60% 12%">
+  </div>
+  <svg class="s-curve" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+    <path class="curve-fill" fill="currentColor" d="M0,86 C420,132 900,-14 1440,52 L1440,110 L0,110 Z"/>
+    <path class="curve-stroke" fill="none" stroke="#1A60AD" stroke-width="6" vector-effect="non-scaling-stroke" d="M0,86 C420,132 900,-14 1440,52"/>
+  </svg>
+
+  <div class="content">
+    <div class="col-main" data-fit-box>
+      <img class="logo" data-logo="color" src="../logos/tab-logo-color.svg" alt="TAB The Alternative Board">
+      <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="24">Invitation only</div>
+      <h1 class="title" data-field="title" data-label="Event name" data-max="22" data-fit="110">Taste of TAB</h1>
+      <p class="subtitle" data-field="subtitle" data-label="Subtitle" data-max="70" data-optional data-fit="30">A sample peer advisory board session for business owners</p>
+    </div>
+    <div class="col-side">
+      <div class="details">
+        <span class="rule"></span>
+        <div class="detail" data-field="date" data-label="Date" data-max="28" data-fit="32">Thursday, October 15</div>
+        <div class="detail" data-field="time" data-label="Time" data-max="28" data-fit="32">7:30–9:30 AM</div>
+        <div class="detail detail--muted" data-field="location" data-label="Location" data-max="30" data-fit="30">[Venue] · [City, ST]</div>
+      </div>
+      <div class="cta" data-field="cta" data-label="Button" data-max="24">Request your seat</div>
+    </div>
+  </div>
+</main>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "Event banner · Taste of TAB",
+  "group": "Events",
+  "size": [2160, 1080],
+  "motif": "A · Ascending S-curve",
+  "variants": null,
+  "photos": ["05-taste-of-tab", "01-peer-board", "04-strategy-workshop"],
+  "rules": [
+    "One S-curve per piece, always ascending left to right, 6px #1A60AD stroke.",
+    "The CTA is orange #F78F3F with Marino text, weight 800. Never white text on orange.",
+    "Eventbrite shows this banner small: keep the event name short (22 characters) and the details to one line each.",
+    "Perla canvas + photo only; don't add more colored backgrounds.",
+    "Invitation-only language stays in the eyebrow, in caps with wide tracking."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+</body>
+</html>

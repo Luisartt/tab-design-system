@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · Email signature</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  /* Only the preview page is styled here. The signature itself (#signature) is
+     table-based with inline styles so it survives paste into Gmail / Outlook. */
+  .artboard { --k: 1; background: var(--blanco); }
+  .sig-stage { position: absolute; inset: 0; padding: 36px 40px; }
+
+  .tpl-chrome { width: 640px; padding: 24px 0 48px; color: var(--marino-logo); }
+  .tpl-chrome .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tpl-chrome button {
+    font-family: var(--font-cuerpo); font-weight: 700; font-size: 16px; line-height: 1.2; min-height: 44px; padding: 10px 22px;
+    border-radius: var(--radio-boton); border: none; cursor: pointer; transition: background .15s, color .15s;
+    background: var(--azul-tab); color: var(--blanco);
+  }
+  .tpl-chrome button:hover { background: var(--azul-accion); }
+  .tpl-chrome button:active { background: var(--marino-profundo); }
+  .tpl-chrome button:focus-visible { outline: none; box-shadow: var(--anillo-foco); }
+  .tpl-chrome button.secondary { background: transparent; color: var(--azul-tab); box-shadow: inset 0 0 0 2px var(--azul-tab); }
+  .tpl-chrome button.secondary:hover { background: var(--hielo); }
+  .tpl-chrome button.secondary:focus-visible { box-shadow: inset 0 0 0 2px var(--azul-tab), var(--anillo-foco); }
+  .tpl-chrome p { font-size: 13px; line-height: 1.5; color: var(--texto-secundario); margin: 14px 0 0; }
+  .tpl-chrome .status { font-weight: 700; color: var(--azul-accion); min-height: 20px; }
+  body { padding: 32px; }
+  html.tab-embedded body { padding: 0; }
+</style>
+</head>
+<body>
+<main class="artboard" data-template="email-signature" style="width:640px;height:230px">
+  <div class="sig-stage">
+    <div id="signature">
+<!-- TAB email signature: table-based, inline styles, web-safe fallbacks (Arial). -->
+<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;font-family:'Open Sans',Arial,Helvetica,sans-serif;color:#181C4D;">
+  <tr>
+    <td valign="top" style="padding:4px 22px 0 0;vertical-align:top;">
+      <!-- LOGO: export brand-kit/exports/tab-logo-color-600.png (600px wide, white background),
+           host it on your own website or CDN over https, and replace the src below with its
+           absolute URL. Keep width="150" (display size; the 600px file keeps it sharp on retina). -->
+      <img data-sig-logo src="https://www.example.com/email/tab-logo-color-600.png" data-preview-src="../exports/tab-logo-color-600.png" width="150" alt="TAB The Alternative Board" style="display:block;width:150px;height:auto;border:0;outline:none;text-decoration:none;">
+    </td>
+    <td valign="top" style="padding:0 0 0 22px;border-left:2px solid #DBE8F2;vertical-align:top;">
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#181C4D;"><span data-field="name" data-label="Name" data-max="40">Alex Morgan</span></p>
+      <p style="margin:2px 0 0 0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;font-weight:400;color:#4A5578;"><span data-field="title" data-label="Title" data-max="48">Business Coach &amp; Board Facilitator</span></p>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;font-weight:700;color:#181C4D;"><span data-field="company" data-label="Company" data-max="48">The Alternative Board (TAB)</span></p>
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;margin:10px 0 10px 0;">
+        <tr><td width="48" height="3" bgcolor="#1A60AD" style="width:48px;height:2.5px;background-color:#1A60AD;font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td></tr>
+      </table>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">P</span>&nbsp;&nbsp;<a data-bind-href="tel:{phone|tel}" href="tel:5125550142" style="color:#181C4D;text-decoration:none;"><span data-field="phone" data-label="Phone" data-max="24">(512) 555-0142</span></a></p>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">E</span>&nbsp;&nbsp;<a data-bind-href="mailto:{email}" href="mailto:alex.morgan@example.com" style="color:#0063B0;text-decoration:none;"><span data-field="email" data-label="Email" data-max="48">alex.morgan@example.com</span></a></p>
+      <p style="margin:0;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#181C4D;"><span style="color:#4A5578;font-weight:700;">W</span>&nbsp;&nbsp;<a data-bind-href="https://{website|url}" href="https://www.thealternativeboard.com" style="color:#0063B0;text-decoration:none;"><span data-field="website" data-label="Website" data-max="48">thealternativeboard.com</span></a></p>
+    </td>
+  </tr>
+</table>
+    </div>
+  </div>
+  <span data-field="logo_url" data-label="Hosted logo URL (https, PNG)" data-max="200" data-help="Where you host tab-logo-color-600.png. Used in the copied signature; the preview shows a local copy." hidden>https://www.example.com/email/tab-logo-color-600.png</span>
+</main>
+
+<!-- Page chrome: outside the signature block (hidden inside the editor, which has its own buttons) -->
+<div class="tpl-chrome">
+  <div class="row">
+    <button type="button" id="copy-sig">Copy signature</button>
+    <button type="button" class="secondary" id="copy-html">Copy HTML source</button>
+  </div>
+  <p class="status" id="sig-status" role="status" aria-live="polite"></p>
+  <p>Gmail: Settings → See all settings → Signature → paste. Outlook (web/new): Settings → Mail → Compose and reply → paste. Outlook desktop: paste into the signature editor. Host the logo PNG first (see the comment in the source) or it won't show for recipients.</p>
+</div>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "Email signature",
+  "group": "Email",
+  "size": [640, 230],
+  "motif": "E · Short rule",
+  "variants": null,
+  "photos": [],
+  "export": "signature",
+  "rules": [
+    "Host tab-logo-color-600.png on your own https site and paste its URL into 'Hosted logo URL' before copying.",
+    "Logo stays at 150px wide: the minimum with tagline is 140px.",
+    "No quotes, banners, emoji or extra colors in signatures.",
+    "Fonts fall back to Arial in most mail apps; that's expected."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+<script>
+(function () {
+  'use strict';
+  var logo = document.querySelector('[data-sig-logo]');
+  // Show a local copy in the preview; the copied signature always uses the hosted URL.
+  if (logo && logo.dataset.previewSrc) {
+    logo.onerror = function () { logo.onerror = null; logo.src = '../logos/tab-logo-color.svg'; };
+    logo.src = logo.dataset.previewSrc;
+  }
+
+  function fieldValue(name) {
+    var f = (window.TAB.fields() || []).filter(function (x) { return x.name === name; })[0];
+    return f ? f.value : '';
+  }
+
+  function signatureHTML() {
+    var clone = document.getElementById('signature').cloneNode(true);
+    var img = clone.querySelector('[data-sig-logo]');
+    if (img) img.setAttribute('src', fieldValue('logo_url').trim() || 'https://www.example.com/email/tab-logo-color-600.png');
+    clone.querySelectorAll('*').forEach(function (el) {
+      ['contenteditable', 'spellcheck', 'class'].forEach(function (a) { el.removeAttribute(a); });
+      Array.prototype.slice.call(el.attributes).forEach(function (a) { if (/^data-/.test(a.name)) el.removeAttribute(a.name); });
+    });
+    return clone.innerHTML.trim();
+  }
+  function signatureText() {
+    return ['name', 'title', 'company', 'phone', 'email', 'website'].map(fieldValue).filter(Boolean).join('\n');
+  }
+
+  function copyViaSelection(html) {
+    var box = document.createElement('div');
+    box.setAttribute('contenteditable', 'true');
+    box.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0;';
+    box.innerHTML = html;
+    document.body.appendChild(box);
+    var range = document.createRange(); range.selectNodeContents(box);
+    var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+    var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    sel.removeAllRanges(); box.remove();
+    return ok;
+  }
+
+  function copySignature() {
+    var html = signatureHTML();
+    if (navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
+      return navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([signatureText()], { type: 'text/plain' })
+      })]).then(function () { return true; }, function () { return copyViaSelection(html); });
+    }
+    return Promise.resolve(copyViaSelection(html));
+  }
+  function copySource() {
+    var html = signatureHTML();
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(html).then(function () { return true; }, function () { return false; });
+    var ta = document.createElement('textarea'); ta.value = html; document.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; } ta.remove();
+    return Promise.resolve(ok);
+  }
+
+  var status = document.getElementById('sig-status');
+  function report(ok, what) { status.textContent = ok ? what + ' copied. Paste it into your mail settings.' : 'Copy was blocked by the browser. Select the signature above and copy it manually.'; }
+  document.getElementById('copy-sig').addEventListener('click', function () { copySignature().then(function (ok) { report(ok, 'Signature'); }); });
+  document.getElementById('copy-html').addEventListener('click', function () { copySource().then(function (ok) { report(ok, 'HTML source'); }); });
+
+  window.TABSignature = { html: signatureHTML, text: signatureText, copy: copySignature, copySource: copySource };
+})();
+</script>
+</body>
+</html>

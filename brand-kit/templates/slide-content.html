@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TAB · Slide · Content (1920×1080)</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="_template.css">
+<style>
+  .artboard { --k: 2; --m: 120px; background: var(--blanco); }
+
+  .main { position: absolute; left: var(--m); top: 96px; width: 1040px; height: 790px; display: flex; flex-direction: column; }
+  .main .eyebrow { font-size: 24px; }
+  .h1 { margin-top: 18px; font-family: var(--font-display); font-weight: 800; font-size: 72px; line-height: 1.12; color: var(--marino-logo); }
+  .main .h2 { margin-top: 16px; font-size: 34px; }
+
+  .main .steps { list-style: none; margin-top: 52px; display: flex; flex-direction: column; gap: 34px; }
+  .step { display: grid; grid-template-columns: 64px 1fr; column-gap: 32px; align-items: start; }
+  .step-num {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--naranja);
+    color: var(--marino-logo); font-family: var(--font-cuerpo); font-weight: 800; font-size: 30px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-title { font-family: var(--font-cuerpo); font-weight: 700; font-size: 34px; line-height: 1.25; color: var(--marino-logo); padding-top: 6px; }
+  .step-text { font-family: var(--font-cuerpo); font-weight: 400; font-size: 29px; line-height: 1.45; color: var(--texto-secundario); margin-top: 4px; }
+
+  .photo-card { position: absolute; right: var(--m); top: 96px; width: 560px; height: 780px; border-radius: calc(var(--radio-tarjeta) * 2); overflow: hidden; box-shadow: var(--sombra-reposo); }
+  .photo-card .photo-wrap { position: absolute; inset: 0; }
+
+  /* footer: one ascending S-curve as a rule (stroke only), footer line + wordmark */
+  .s-curve { top: 918px; height: 70px; }
+  .footer { position: absolute; left: var(--m); bottom: 40px; font-family: var(--font-cuerpo); font-weight: 600; font-size: 20px; line-height: 1.4; color: var(--texto-secundario); }
+  .wordmark { position: absolute; right: var(--m); bottom: 38px; }
+  .wordmark .logo { width: 132px; }
+
+  .artboard[data-variant="text"] .photo-card { display: none; }
+  .artboard[data-variant="text"] .main { width: 1440px; }
+</style>
+</head>
+<body>
+<main class="artboard" data-template="slide-content" data-variant="photo" style="width:1920px;height:1080px">
+  <div class="main" data-fit-box>
+    <div class="eyebrow" data-field="eyebrow" data-label="Eyebrow" data-max="32" data-optional>Board meetings</div>
+    <h1 class="h1" data-field="h1" data-label="H1" data-max="48" data-fit="48">How a TAB board meeting works</h1>
+    <h2 class="h2" data-field="h2" data-label="H2" data-max="80" data-optional data-fit="28">Real issues, honest perspective, clear next steps</h2>
+    <ol class="steps">
+      <li class="step"><span class="step-num">1</span><div><div class="step-title" data-field="s1_title" data-label="Step 1 title" data-max="32">Check in</div><div class="step-text" data-field="s1_text" data-label="Step 1 text" data-max="70" data-optional data-fit="22">Each owner shares wins, numbers and what’s on their mind.</div></div></li>
+      <li class="step"><span class="step-num">2</span><div><div class="step-title" data-field="s2_title" data-label="Step 2 title" data-max="32">Bring an issue</div><div class="step-text" data-field="s2_text" data-label="Step 2 text" data-max="70" data-optional data-fit="22">One member presents a real challenge or opportunity.</div></div></li>
+      <li class="step"><span class="step-num">3</span><div><div class="step-title" data-field="s3_title" data-label="Step 3 title" data-max="32">Get the board’s perspective</div><div class="step-text" data-field="s3_text" data-label="Step 3 text" data-max="70" data-optional data-fit="22">Peers ask hard questions and share what worked for them.</div></div></li>
+      <li class="step"><span class="step-num">4</span><div><div class="step-title" data-field="s4_title" data-label="Step 4 title" data-max="32">Commit to action</div><div class="step-text" data-field="s4_text" data-label="Step 4 text" data-max="70" data-optional data-fit="22">Leave with clear next steps, and report back next time.</div></div></li>
+    </ol>
+  </div>
+
+  <div class="photo-card">
+    <div class="photo-wrap"><img class="photo" data-photo="main" src="../photos/01-peer-board.jpg" alt="" style="object-position:72% 50%"></div>
+  </div>
+
+  <svg class="s-curve" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+    <path class="curve-stroke" fill="none" stroke="#1A60AD" stroke-width="5" vector-effect="non-scaling-stroke" d="M0,86 C420,132 900,-14 1440,52"/>
+  </svg>
+  <div class="footer" data-field="footer" data-label="Footer" data-max="60" data-optional>The Alternative Board · Member orientation</div>
+  <div class="wordmark"><img class="logo" data-logo="wordmark-color" src="../logos/tab-wordmark-color.svg" alt="TAB"></div>
+</main>
+
+<script type="application/json" id="tab-meta">
+{
+  "name": "Slide · Content",
+  "group": "Presentations",
+  "size": [1920, 1080],
+  "motif": "A · S-curve footer rule, process markers",
+  "variants": { "photo": "Text + photo", "text": "Text only" },
+  "photos": ["01-peer-board", "04-strategy-workshop", "02-coaching"],
+  "rules": [
+    "H1 in Montserrat 800, H2 in Open Sans 800 Azul Acción; body in Open Sans.",
+    "Orange numbered circles mark process steps; numbers are Marino, never white on orange.",
+    "Four steps max per slide; keep each line short enough to read from the back of the room.",
+    "One S-curve per slide: it's the footer rule."
+  ]
+}
+</script>
+<script src="_template.js"></script>
+</body>
+</html>
