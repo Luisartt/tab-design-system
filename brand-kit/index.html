@@ -144,7 +144,7 @@
 <div class="hero">
   <img src="photos/01-peer-board.jpg" alt="Consejo asesor de dueños de negocio en plena sesión">
   <div class="wrap">
-    <p class="eyebrow">Brand kit · v1.0 · Septiembre 2026</p>
+    <p class="eyebrow">Brand kit · v1.0</p>
     <h1>Todo lo que TAB necesita para verse como TAB</h1>
     <p>Logos en vector, paleta, tipografía, fotografía de marca y plantillas editables. Cualquier persona del equipo puede producir una pieza correcta en minutos, sin romper la marca.</p>
     <div class="ctas">
@@ -353,8 +353,8 @@ FAL_KEY=... NODE_USE_ENV_PROXY=1 \
   // Filled from photos/SHOOTOUT.md picks; model names are the shootout winners.
   const PHOTOS = [
     { id: '01-peer-board', title: 'Consejo de pares', use: 'Hero, posts con velo, fondo virtual', model: 'Seedream 5 Pro' },
-    { id: '02-coaching', title: 'Coaching 1:1', use: 'Posts verticales 4:5, mensajes de coaching', model: 'Seedream 5 Pro' },
-    { id: '03-owner', title: 'Dueño en su negocio', use: 'Spotlight, "tu negocio", duotono', model: 'Nano Banana Pro' },
+    { id: '02-coaching', title: 'Coaching 1:1', use: 'Posts verticales 4:5, mensajes de coaching', model: 'Seedream 5 Pro', pos: '50% 22%' },
+    { id: '03-owner', title: 'Dueño en su negocio', use: 'Spotlight, "tu negocio", duotono', model: 'Nano Banana Pro', pos: '50% 35%' },
     { id: '04-strategy-workshop', title: 'Taller de estrategia', use: 'StratPro, planeación, LinkedIn', model: 'Nano Banana Pro' },
     { id: '05-taste-of-tab', title: 'Taste of TAB', use: 'Evento por invitación, banners', model: 'Seedream 5 Pro' },
   ];
@@ -362,7 +362,7 @@ FAL_KEY=... NODE_USE_ENV_PROXY=1 \
   PHOTOS.forEach((p) => {
     const c = document.createElement('div');
     c.className = 'card photo-card';
-    c.innerHTML = `<img src="photos/${p.id}.jpg" alt="${p.title}" loading="lazy"><div class="body"><h3>${p.title}</h3><p class="caption" style="margin:4px 0 0">${p.use}${p.model ? ' · ' + p.model : ''}</p><div class="dl" style="margin-top:8px"><a class="link" href="photos/${p.id}.jpg" download>Descargar</a></div></div>`;
+    c.innerHTML = `<img src="photos/${p.id}.jpg" alt="${p.title}" loading="lazy" style="object-position:${p.pos || '50% 50%'}"><div class="body"><h3>${p.title}</h3><p class="caption" style="margin:4px 0 0">${p.use}${p.model ? ' · ' + p.model : ''}</p><div class="dl" style="margin-top:8px"><a class="link" href="photos/${p.id}.jpg" download>Descargar</a></div></div>`;
     ph.appendChild(c);
   });
 

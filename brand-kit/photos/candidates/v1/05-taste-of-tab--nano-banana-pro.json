@@ -1,0 +1,13 @@
+{
+  "id": "05-taste-of-tab",
+  "model": "nano-banana-pro",
+  "endpoint": "fal-ai/nano-banana-pro",
+  "aspect": "16:9",
+  "prompt": "An invitation-only morning sample session for business owners. A small group of six people stand and chat in a bright modern meeting room before sitting down; two of them shake hands warmly, others hold coffee cups. Round tables set with notebooks and water glasses in the background. Relaxed, welcoming, professional, early-morning daylight. Group positioned center-right.",
+  "style": "TAB house photography",
+  "seed": null,
+  "width": 2752,
+  "height": 1536,
+  "seconds": 30,
+  "generated_at": "2026-09-24T04:00:48.168Z"
+}
