@@ -60,4 +60,4 @@ Higgsfield Soul no está disponible en fal.ai. Si el equipo usa Higgsfield, `pho
 
 - Reemplazar los SVG vectorizados por los maestros de agencia si TAB HQ los entrega.
 - Variantes de logo StratPro y Hi-MAP: siguen sin archivo fuente.
-- Hospedar `logos/tab-logo-color-600.png` en una URL pública y ponerla en `templates/email-signature.html`.
+- Hospedar `exports/tab-logo-color-600.png` (fondo blanco, seguro en modo oscuro) en una URL pública y ponerla en `templates/email-signature.html`.

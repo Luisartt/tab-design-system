@@ -15,7 +15,7 @@ normalized to the brand's exact hex values. See `uploads/TAB - Design System.md.
 | `tab-logo-color.svg` | Icon + "TAB" + ® + tagline, 2 colors | White or Perla `#EFEEF3` backgrounds (default) |
 | `tab-logo-white.svg` | Full lockup, knockout white | Marino, Azul TAB, Azul Acción, or a photo veil |
 | `tab-logo-navy.svg` | Full lockup, single Marino `#181C4D` | 1-color / low-cost print |
-| `tab-wordmark-color.svg` | Icon + "TAB" + ®, **no tagline**, 2 colors | Widths under 90 px where the tagline loses legibility |
+| `tab-wordmark-color.svg` | Icon + "TAB" + ®, **no tagline**, 2 colors | When the logo would render 90–139 px wide and the tagline stops being legible. Below 90 px use the icon only |
 | `tab-wordmark-white.svg` | Same, knockout white | Same, on dark/colored backgrounds |
 | `tab-icon-color.svg` | Icon only (no letters, no ®), 2 colors | Avatars, app icons, seals — never next to the full logo |
 | `tab-icon-white.svg` | Icon only, knockout white | Dark/colored backgrounds |

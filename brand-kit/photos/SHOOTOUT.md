@@ -75,7 +75,7 @@ Both models are usable and, at the pixel level, remarkably clean — across all 
 |---|---|---|---|---|
 | `01-peer-board.jpg` | seedream-5-pro | Hero / photo-veil posts, virtual background (16:9) | `65% 55%` (keeps the speaker's gesture and left wall clear for text) | Not intended for duotone (veil use); cool neutral tones would carry a blue multiply fine if ever needed |
 | `02-coaching.jpg` | seedream-5-pro | Portrait social posts / coaching messaging (4:5) | `68% 62%` | Yes — cool navy/blue wardrobe and neutral wall hold up well desaturated |
-| `03-owner.jpg` | nano-banana-pro | Member spotlight, "your business" messaging — built for duotone | `58% 45%` | Yes, by design — good highlight/shadow range for the `#0F75BC` multiply |
+| `03-owner.jpg` | nano-banana-pro | "Your business" concept messaging, built for duotone. Never next to a real member's name | `58% 45%` | Yes, by design — good highlight/shadow range for the `#0F75BC` multiply |
 | `04-strategy-workshop.jpg` | nano-banana-pro | StratPro / strategic-planning content, LinkedIn link posts (16:9) | `68% 48%` | Yes if ever duotoned, but primarily a veil/text shot — left window strip is the text-safe zone |
 | `05-taste-of-tab.jpg` | seedream-5-pro (round 2) | Taste of TAB event banners, invitation promos (16:9) | `60% 45%` | Not intended for duotone; keep as a full-color shot. Left quarter is soft window light for the veil |
 
