@@ -1,6 +1,6 @@
 ---
 name: tab-publicacion
-description: Create a TAB (The Alternative Board) publication from a marketing strategy. Takes the target audience from the wiki, asks a short set of questions about the publication (Instagram carousel or LinkedIn post, topic, objective and CTA, data), reads the TAB information in the vault, produces four different options of the piece in the TAB brand in Spanish (Mexico), lets the user choose one, runs a change-review loop, optionally animates the piece (HTML to MP4) if the user wants, writes the accompanying text, runs a second review loop and then publishes (LinkedIn and Instagram, both via the Buffer connector). Use when Luisart says "haz una publicación de TAB", "post para TAB", "carrusel de TAB", "contenido para Taste of TAB / StratPro / Hi-MAP", or gives a TAB strategy and wants the piece made. Not for @soyluisart posts and not for TAB videos (those use the TAB video brand and luisart-* skills).
+description: Create a TAB (The Alternative Board) publication from a marketing strategy. Takes the target audience from the wiki, asks a short set of questions about the publication (Instagram carousel or LinkedIn post, topic, objective and CTA, data), reads the TAB information in the vault, produces four different options of the piece in the TAB brand in Spanish (Mexico), lets the user choose one, runs a change-review loop, optionally animates the piece (HTML to MP4) if the user wants, writes the accompanying text, runs a second review loop and then publishes (LinkedIn and Instagram, both via the Buffer connector). Use when Luisart says "haz una publicación de TAB", "post para TAB", "carrusel de TAB", "contenido para Taste of TAB / StratPro / Hi-MAP", or gives a TAB strategy and wants the piece made. Not for @soyluisart posts and not for TAB videos (those use the TAB video brand and luisart-* skills). Works standalone with the bundled designs/ folder; no wiki or vault required.
 ---
 
 # tab-publicacion
@@ -14,6 +14,17 @@ Talk to Luisart in Spanish. The publication itself is in **Spanish (Mexico)**, M
 Nothing below is a fixed path. `<VAULT>` is the vault root on the device in use, `<TAB>` is the TAB sources folder inside it, and `<TAB-DESIGNS>` is the folder of ready-made TAB design resources, and `<TAB-WIKI>` is the folder with the TAB wiki pages. All four are found and re-validated in step 0 and can change from one computer to another.
 
 Current known locations (relative to `<VAULT>`; these are the starting guess, step 0 corrects them): `<TAB>` = `Finanzas/TAB`, `<TAB-DESIGNS>` = `wiki/Content Creation/Designs/TAB`, `<TAB-WIKI>` = `wiki/Content Creation/Styles/TAB`. Never hard-code `C:\Users\...` in anything you write.
+
+## Standalone mode (default when there is no vault)
+
+The skill works **without a wiki or vault**. Its default resources are the `designs/` folder of the TAB design system repo (https://github.com/Luisartt/tab-design-system), installed next to this file at `<SKILL-DIR>/designs/` (usually `~/.claude/skills/tab-publicacion/designs/`) or present as `designs/` in the current repo.
+
+- `<TAB-DESIGNS>` = that `designs/` folder. `designs/README.md` is its catalogue and matches the "Category -> reference example" table below.
+- `<VAULT>`, `<TAB>` (sources) and `<TAB-WIKI>` do **not exist** in this mode. Nothing asks for them. The audience, brand and voice come from the sections of this file ("Brand voice", "Category -> reference example", step 1) and from `readme.md` of the design-system repo if it is present.
+- Facts: only what the user provides in this request. There are no vault sources, so any figure, name or quote he does not give is left out or marked "dato de ejemplo". Never invent.
+- Fonts: kept in `<TAB-DESIGNS>/fonts/` (see "TAB fonts"), downloaded once.
+- Output: files go to `./tab-publicaciones/<YYYY-MM-DD> <short title>/` in the current working directory (see step 11); no wiki page, no `Log.md`.
+- **Vault mode** applies only if the user names a vault folder, `ruta.local.json` has a valid `vault`, or the working directory is a vault (`CLAUDE.md` + `wiki/`). Then every step below that mentions the vault applies as written.
 
 ## What this skill reads (all read-only)
 
@@ -35,12 +46,13 @@ Never open `Notas personales/`. Never edit anything in the source folders (a new
 
 The wiki moves between devices and folders get renamed, so nothing is trusted from memory: **every run re-validates every path**, even when `ruta.local.json` exists.
 
-1. **Vault folder. Ask for it unless it is already cited.** It counts as cited when any of these is true, in this order:
+0. **Decide the mode first.** If a vault is cited (rules below), use vault mode. Otherwise use **standalone mode**: locate `<TAB-DESIGNS>` as `<SKILL-DIR>/designs/`, else `./designs/` in the working directory, else search the home `.claude/skills/tab-publicacion/designs`. If found, do **not** ask for any folder; skip items 1-3 and go to item 4 (fonts check), saying in one line "Modo independiente: usando designs/ en <ruta>". If `designs/` is not found anywhere, tell the user to install it from the repo (or give the path) and stop; do not continue without it unless he accepts building the visuals from scratch.
+1. **Vault folder (vault mode only). Ask for it only when he said he has a wiki/vault but did not cite it; otherwise it is not asked.** It counts as cited when any of these is true, in this order:
    - the user's message names a folder or path;
    - the file `ruta.local.json` next to this SKILL.md exists and its `vault` still exists on disk;
    - the current working directory (or a parent) is a vault: it holds `CLAUDE.md` and a `wiki/` folder.
 
-   If none holds, ask once, in Spanish: "Antes de empezar, cita la carpeta de tu wiki (la raíz del vault). Puedes pegar la ruta o arrastrar la carpeta aquí." Do nothing else until he answers. Check that the path exists and looks like the vault (`wiki/` and `CLAUDE.md`); if not, say what is missing and ask again.
+   If none holds and `designs/` was found, stay in standalone mode. Only if he says he has a wiki/vault, ask once, in Spanish: "Cita la carpeta de tu wiki (la raíz del vault). Puedes pegar la ruta o arrastrar la carpeta aquí." Check that the path exists and looks like the vault (`wiki/` and `CLAUDE.md`); if not, say what is missing and ask again.
 2. **Re-validate the TAB paths.** For each one, test the saved or known path first; if it is missing or does not look right, search under `<VAULT>` (skip `node_modules`, `.git`, `.venv`, `Notas personales`):
 
    | Path | How it is recognised |
@@ -115,12 +127,16 @@ When a reference carries sample text ("Texto de ejemplo", "[fecha]", "Dato de ej
 
 ### 1. Target audience (taken from the wiki, never asked)
 
+Standalone mode: no wiki. Use this fixed audience: owners and general managers of growing private businesses (revenue above 5M MXN, 3+ employees) who want to stop deciding alone and grow with peer accountability; hosts and referral partners only if the user's answers point there. State it in one line.
+
 The audience is not a question. Read it from the wiki every time and state it in one line before the questions:
 - `wiki/Knowledge/Entities/TAB.md` and `<TAB>/overview.md`: segment (owners and general managers of growing private businesses, revenue above 5M MXN, 3+ employees, operating territory), core need (stop deciding alone, grow with peer accountability), tone.
 - `TAB Marketing Brief.md` section 1: audiences table. Public-facing posts default to **business owners and leadership teams**; hosts, referral partners and new facilitators are a smaller stream and only if the user's answer points there.
 - Use the wiki wording (and its dated figures only under the statistics rule of step 2). If the wiki and the sources disagree, say so.
 
 ### 2. Gather the TAB information that serves that strategy
+
+Standalone mode: there is no vault to read. The fact sheet is only what the user provides now plus the generic TAB descriptions of this file; ask him in step 3 ("Data to include") for every figure, name, quote and date, and mark anything else "dato de ejemplo".
 
 Read only what the topic and objective need: the Brief, the matching concept pages, the summaries, and, for any figure or quote you plan to print, the original file in `<TAB>`. Build a short fact sheet: each fact with its source path. Rules:
 - A fact without a source in the vault is not used. Say what is missing instead of inventing it.
@@ -292,6 +308,8 @@ The connectors are deferred tools: load their schemas with ToolSearch before cal
 - Report in Spanish what was published or scheduled: channel, date and time, and post identifiers or links the connector returns.
 
 ### 11. Filing and report
+
+**Standalone mode:** save the final PNGs (`NN Title.png`), the MP4s if any, and `Texto.md` (Spanish caption/post text, sources of the facts the user gave, open points and the TAB-logo approval flag) in `./tab-publicaciones/<YYYY-MM-DD> <short title>/`. Do not write wiki pages or `Log.md`. Report the folder path. The rest of this step is vault mode.
 
 The piece is TAB company material, so it is filed in the database, by category, one folder per piece: `<TAB>/publicaciones/<YYYY-MM-DD> <short title>/` holding only the final PNGs (`NN Title.png`). Also write one page in English at `wiki/Content Creation/Styles/TAB/Publications/<title>.md` with: audience, topic, objective, pillar and stage, the Spanish copy and caption, images embedded by full vault path, the final caption/text, where and when it was published (or "not published"), `## Sources Used` (every page or file read), open points and the approval flag, ending in `## Key Takeaways`; link it from `TAB Gallery.md` and add a `Log.md` entry (`[content] ingest`, wrote bullets). File the approved version after step 9 even if he decides not to publish. Work locally: no commit or push unless Luisart asks.
 
