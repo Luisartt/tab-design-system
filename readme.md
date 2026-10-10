@@ -37,7 +37,9 @@ Sistema de diseño de **TAB (The Alternative Board)**, franquicia internacional 
 - Sin emoji, sin icon fonts.
 
 ## Activos (assets/)
-- \`assets/logo/tab-logo-color.png\` — logo principal 2 tintas (fondos blancos/Perla). **Único archivo de logo provisto.** Las variantes blanca/marina/icono aisladas que la guía referencia no venían en el material: aparecen solo dentro de las piezas. No se reconstruyeron — usar el PNG provisto o texto plano.
+- \`assets/logo/tab-logo-color.png\` — logo principal 2 tintas con el tagline en español **"EL CONSEJO DE EMPRESARIOS"** (vigente desde 2026-10-09; sustituye al de "THE ALTERNATIVE BOARD"), PNG transparente, para fondos blancos o Perla.
+- \`assets/logo/tab-logo-navy.png\` — monocromo marino (1 tinta). \`assets/logo/tab-logo-black.png\` — monocromo negro.
+- Sigue sin haber versión blanca (knockout) ni icono aislado: el logo va solo sobre blanco o Perla.
 - \`assets/imagery/stratpro-1..4.png\` — piezas StratPro junio 2026 (lienzo marino, diamante, diagrama).
 - \`assets/imagery/taste-of-tab-header.png\` (2160×1080) y \`taste-of-tab-linkedin.png\` — evento sobre Perla con curva "S".
 - \`assets/imagery/li-pulse-june-2026.png\`, \`assets/imagery/social/*.png\` — posts reales de referencia (case study, duotono).

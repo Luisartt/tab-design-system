@@ -10,7 +10,7 @@ function CaseStudyPost() {
         <div style={{ fontWeight: 600, fontSize: 54, lineHeight: 1.16, opacity: .92 }}>BY LEARNING TO</div>
         <div style={{ fontWeight: 800, fontSize: 68, lineHeight: 1.1 }}>DELEGATE</div>
       </div>
-      <div style={{ position: 'absolute', left: 54, bottom: 44 }}><img src="../../assets/logo/tab-logo-color.png" style={{ width: 230, display: 'block' }} alt="TAB - The Alternative Board" /></div>
+      <div style={{ position: 'absolute', left: 54, bottom: 44 }}><img src="../../assets/logo/tab-logo-color.png" style={{ width: 230, display: 'block' }} alt="TAB - El Consejo de Empresarios" /></div>
     </div>
   );
 }
